@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Sign In{% endblock title %}
+{% block content %}
+<!-- Hero-->
+{% load static %}
+<section class="module-cover parallax fullscreen text-center" data-background="{% static 'assets/images/module-16.jpg' %}" data-overlay="0.65" data-gradient="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 m-auto">
+                            <div class="m-b-20">
+                                <h6>Sign into your account</h6>
+                            </div>
+                            <div class="m-b-20">
+                                <form method="post">
+                                    
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.password }}
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="m-b-20">
+                                <p><small>Dont have an account yet? <a href="register">Create account</a> <br>
+                                        Forgot your username or password? <a href="#">Recover account</a></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+
+{% endblock content %}

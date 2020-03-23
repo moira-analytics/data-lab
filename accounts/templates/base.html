@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>{% block title %}MOIRA{% endblock %}</title>
+        <!-- Favicons-->
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'assets/images/moira-icon.jpg' %}">
+        <link rel="apple-touch-icon" href="{% static 'assets/images/apple-touch-icon.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/images/apple-touch-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'assets/images/apple-touch-icon-114x114.png' %}">
+        <!-- Web Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600%7cPlayfair+Display:400i" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- Plugins-->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js"></script>
+        <link href="{% static 'assets/css/plugins.min.css' %}" rel="stylesheet">
+        <!-- Template core CSS-->
+        <link href="{% static 'assets/css/template.css' %}" rel="stylesheet">
+        <!-- multiline chart CSS-->
+        <link href="{% static 'assets/css/multiline.css' %}" rel="stylesheet">
+        <!-- Ladda loading button CSS -->
+        <link href="{% static 'assets/css/loading.css' %}" rel="stylesheet">
+    </head>
+    
+    
+    
+    
+    <body>
+        <!-- Preloader-->
+        <div class="page-loader">
+            <div class="page-loader-inner">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Preloader end-->
+        
+        <!-- Header-->
+        <header class="header">
+            <div class="container-fluid">
+                <!-- Brand-->
+                <div class="inner-header">
+                    <a class="inner-brand" href="home">
+                        <img src="{% static 'assets/images/moira.jpg' %}" alt>
+                    </a>
+                </div>
+                <!-- Navigation-->
+                <div class="inner-navigation collapse">
+                    <div class="inner-nav">
+                        <ul>
+                            
+                            <li class="menu-item-has-children">
+                                {% if user.is_authenticated %}
+                                <a href="data-lab">
+                                {% else %}
+                                <a href="login">
+                                {% endif %}
+                                    <span class="menu-item-span">Data Lab</span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="data-lab">Instructions</a></li>
+                                    <li><a href="rates">Data Query</a></li>
+                                    <li><a href="ts_groups">Time Series Groups</a></li>
+                                    <li><a href="geo1">Geography</a></li>
+                                </ul>
+                            
+                            </li>
+                            <li><a href="docs"><span class="menu-item-span">Documentation</span></a></li>
+                           <!-- <li><a href="forum"><span class="menu-item-span">Research</span></a></li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="extra-nav">
+                    
+                    
+                    <div>
+                        
+                    
+                    <br>
+                    {% if user.is_authenticated %}
+                    {{ user.get_username }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="logout">Log Out</a>
+                    {% else %}
+                    <a href="login">Log In</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="register">Register</a>
+                    {% endif %}
+                    </div>
+                    
+                    
+                   
+                </div>
+            </div>
+        </header>
+        <!-- Header end-->
+        
+        <div class="wrapper">
+            {% block content %}
+            {% endblock content %}
+        <!-- Footer-->
+        <footer class="footer">
+            <div class="footer-widgets">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Text widget-->
+                            <aside class="widget widget-text">
+                                <div class="widget-title">
+                                    <h6>Sources:</h6>
+                                </div>
+                                <div class="textwidget">
+                                    <p><b>1968 - 2017: Mortality and Population Data</b><br>
+                                        National Center for Health Statistics (Compressed Mortality File 1999-2017, Series 20, No. 2T, 2015)<br>
+                                        National Center for Health Statistics (Compressed Mortality File 1989-1998, Series 20, No. 2E, 2003)<br>
+                                        National Center for Health Statistics (Compressed Mortality File 1968-1988, Series 20, No. 2A, 2000)<br>
+                                    </p>
+                                    <p><b>1962 - 1967: Mortality Data</b><br>
+                                        National Center for Health Statistics (Detailed Mortality File 1962-1992)
+                                    </p>
+                                    <p><b>1950 - 1961: Mortality Data</b><br>
+                                        National Center for Health Statistics Mortality data tapes furnished to the University of Pittsburgh’s Department of Biostatistics by the University of Michigan, School of Public Health in 1978
+                                    </p>
+                                    <p><b>1950 - 1967: Population Data</b><br>
+                                        U.S. Environmental Protection Agency, Office of Biometry at Research Triangle Park data tapes donated by Dr. John Van Bruggen
+                                    </p>
+                                    <p><b>Standard Populations for Age Adjusted Rates</b><br>
+                                        The SEER standard populations used for computing age adjusted rates can be found <a href="https://seer.cancer.gov/stdpopulations/stdpop.singleages.html">here</a>
+                                    </p>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- Recent entries widget-->
+                            <aside class="widget widget-recent-entries">
+                                <div class="widget-title">
+                                    <h6>Recent News</h6>
+                                </div>
+                                <ul>
+                                    <li><a href="#">Introducing MOIRA Analytics!</a><span class="post-date">December 1, 2019</span></li>
+                                    <li><a href="#">Introducing the MOIRA Data Lab! A new and improved interactive tool for retrieving and visualizing US mortality data</a><span class="post-date">October 1, 2019</span></li>
+                                    <li><a href="#">2017 Data now available in MOIRA!</a><span class="post-date">April 7, 2018</span></li>
+                                </ul>
+                            </aside>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Twitter widget-->
+                            <div id="divHomeLinks">
+                                <a id="aHomePPH" target="_blank" href="http://www.publichealth.pitt.edu/" class="list-group-item dark-hover">Pitt - Public Health</a>
+                                 <a id="aHomePBio"  target="_blank" href="http://www.publichealth.pitt.edu/biostatistics" class="list-group-item dark-hover">Pitt - Biostatistics</a>
+                                 <a id="aHomePCobe" target="_blank" href="http://www.cobe.biostat.pitt.edu/" class="list-group-item dark-hover">Pitt - Center for Occupational Biostatistics and Epidemiology</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>© 2019 University of Pittsburgh, All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer end-->
+        </div>
+        <!-- To top button-->
+        <a class="scroll-top" href="#top"><i class="fas fa-angle-up"></i></a>
+    
+    </body>
+    
+    <!-- Scripts-->
+    {% block footer_javascript %}
+        {% block footer_javascript_site %}
+            <script src="{% static 'assets/js/custom/jquery-3.2.1.min.js' %}"></script>
+            <script src="{% static 'assets/js/custom/popper.min.js' %}"></script>
+            <script src="{% static 'assets/js/bootstrap/bootstrap.min.js' %}"></script>
+            <script src="{% static 'assets/js/custom/plugins.min.js' %}"></script>
+            <script src="{% static 'assets/js/custom/custom.min.js' %}"></script>
+        {% endblock footer_javascript_site %}
+        {% block footer_javascript_section %}{% endblock footer_javascript_section %}
+        {% block footer_javascript_page %}{% endblock footer_javascript_page %}
+    {% endblock footer_javascript %}
+    
+</html>

@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Analytics{% endblock title %}
+{% block content %}
+
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div id="loading" class="modal">
+                <center>
+                <!-- Modal content -->
+                <div class="modal-dialog-centered">
+                    
+                    <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+                    <br><br>
+                    <h4 style="color: aliceblue">Please Wait</h4>
+                    <p style="color: aliceblue">Fetching data...</p>
+                    <br><br>
+                    </div>
+                    
+                    
+                </div>
+                </center>
+    </div>
+    <div class="container">
+    
+    {{ alerts }}
+        
+    <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row" style="height:100px">
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        Chart Title:&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ tc_form.title_7 }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        No. of Clusters (k = ):&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ tc_form.k_7 }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;
+            
+
+            <button id="formsubmit" class="btn btn-brand" onclick="formSubmit" type="submit">Create Map</button>
+            <button class="btn btn-brand" href="clustering" type="reset"><a style="color:azure" href="geo">New Query</a></button>    
+        </div>
+        
+        </div>
+        <div class="row">
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+                   </div>
+                   <div class="collapse show" style="position: absolute; width:350px" id="collapse-1" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="position: absolute;background-color:ghostwhite">
+                          Year Range:
+                          {{ tc_form.year1_7 }}
+                          <small>-</small>
+                          {{ tc_form.year2_7 }}
+                          <br><hr><p></p>
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+            <br>
+            <div class="accordion" id="accordion2">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-2" class="" aria-expanded="false">Geography</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-2" data-parent="#accordion2">
+                      <div class="accordion-item-body" style="position: absolute; overflow-y: scroll; background-color:ghostwhite">
+                        {{ tc_form.geoLevel_7 }}
+                        States:
+                      {{ tc_form.abbreviatedStates_7 }}
+                      <hr>
+                      Select Counties:<br>
+                      {{ tc_form.allCounties_7 }}&nbsp;&nbsp;<a>Select all counties within specified states</a>
+                      <div class="container" id="countybox" style="background-color:rgba(245, 244, 245, 1);overflow-y: scroll; height:300px">
+                      <small>Alabama</small>
+                        {{ tc_form.ALselect_7 }}
+                        <small>Alaska</small>
+                        {{ tc_form.AKselect_7 }}
+                        <small>Arizona</small>
+                        {{ tc_form.AZselect_7 }}
+                        <small>Arkansas</small>
+                        {{ tc_form.ARselect_7 }}
+                        <small>California</small>
+                        {{ tc_form.CAselect_7 }}
+                        <small>Colorado</small>
+                        {{ tc_form.COselect_7 }}
+                        <small>Connecticut</small>
+                        {{ tc_form.CTselect_7 }}
+                        <small>Delaware</small>
+                        {{ tc_form.DEselect_7 }}
+                        <small>District of Columbia</small>
+                        {{ tc_form.DCselect_7 }}
+                        <small>Florida</small>
+                        {{ tc_form.FLselect_7 }}
+                        <small>Georgia</small>
+                        {{ tc_form.GAselect_7 }}
+                        <small>Hawaii</small>
+                        {{ tc_form.HIselect_7 }}
+                        <small>Idaho</small>
+                        {{ tc_form.IDselect_7 }}
+                        <small>Illinois</small>
+                        {{ tc_form.ILselect_7 }}
+                        <small>Indiana</small>
+                        {{ tc_form.INselect_7 }}
+                        <small>Iowa</small>
+                        {{ tc_form.IAselect_7 }}
+                        <small>Kansas</small>
+                        {{ tc_form.KSselect_7 }}
+                        <small>Kentucky</small>
+                        {{ tc_form.KYselect_7 }}
+                        <small>Louisiana</small>
+                        {{ tc_form.LAselect_7 }}
+                        <small>Maine</small>
+                        {{ tc_form.MEselect_7 }}
+                        <small>Maryland</small>
+                        {{ tc_form.MDselect_7 }}
+                        <small>Massachusetts</small>
+                        {{ tc_form.MAselect_7 }}
+                        <small>Michigan</small>
+                        {{ tc_form.MIselect_7 }}
+                        <small>Minnesota</small>
+                        {{ tc_form.MNselect_7 }}
+                        <small>Mississippi</small>
+                        {{ tc_form.MSselect_7 }}
+                        <small>Missouri</small>
+                        {{ tc_form.MOselect_7 }}
+                        <small>Montana</small>
+                        {{ tc_form.MTselect_7 }}
+                        <small>Nebraska</small>
+                        {{ tc_form.NEselect_7 }}
+                        <small>Nevada</small>
+                        {{ tc_form.NVselect_7 }}
+                        <small>New Hampshire</small>
+                        {{ tc_form.NHselect_7 }}
+                        <small>New Jersey</small>
+                        {{ tc_form.NJselect_7 }}
+                        <small>New Mexico</small>
+                        {{ tc_form.NMselect_7 }}
+                        <small>New York</small>
+                        {{ tc_form.NYselect_7 }}
+                        <small>North Carolina</small>
+                        {{ tc_form.NCselect_7 }}
+                        <small>North Dakota</small>
+                        {{ tc_form.NDselect_7 }}
+                        <small>Ohio</small>
+                        {{ tc_form.OHselect_7 }}
+                        <small>Oklahoma</small>
+                        {{ tc_form.OKselect_7 }}
+                        <small>Oregon</small>
+                        {{ tc_form.ORselect_7 }}
+                        <small>Pennsylvania</small>
+                        {{ tc_form.PAselect_7 }}
+                        <small>Rhode Island</small>
+                        {{ tc_form.RIselect_7 }}
+                        <small>South Carolina</small>
+                        {{ tc_form.SCselect_7 }}
+                        <small>South Dakota</small>
+                        {{ tc_form.SDselect_7 }}
+                        <small>Tennessee</small>
+                        {{ tc_form.TNselect_7 }}
+                        <small>Texas</small>
+                        {{ tc_form.TXselect_7 }}
+                        <small>Utah</small>
+                        {{ tc_form.UTselect_7 }}
+                        <small>Vermont</small>
+                        {{ tc_form.VTselect_7 }}
+                        <small>Virginia</small>
+                        {{ tc_form.VAselect_7 }}
+                        <small>Washington</small>
+                        {{ tc_form.WAselect_7 }}
+                        <small>West Virginia</small>
+                        {{ tc_form.WVselect_7 }}
+                        <small>Wisconsin</small>
+                        {{ tc_form.WIselect_7 }}
+                        <small>Wyoming</small>
+                        {{ tc_form.WYselect_7 }}    
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+            </div>
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion3">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-3" data-parent="#accordion3">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        <p>Choose from ONE group:</p>
+                      <small>OCMAP 63 <b>(Available all time periods)</b></small>
+                      {{ tc_form.cod_7 }}
+                      <hr>
+                      <small>MOIRA 113 <b>(Available between 1979 - 2017)</b></small>
+                      {{ tc_form.cod113_7 }}
+                      <hr>
+                      <small>Custom Cause of Death:</small>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+        <!--   
+        <div class="col-md-3">
+                <br>
+            <div class="accordion" id="accordion4">  
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body">
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion4">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:350px" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion5">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-5" class="" aria-expanded="false">Rate Calculation</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:290px" id="collapse-5" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+=
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion6">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-6" class="" aria-expanded="false">Map Options</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-6" data-parent="#accordion6">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  -->
+        <!--   
+        <div class="col-md-3">
+                <br>
+            <div class="accordion" id="accordion4">  
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body">
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>    -->
+        </div>
+        <br><hr><center><h5>{{ title }}</h5></center><br> 
+        <center>
+            {% load static %}
+            {{ source1 }}"{% static 'clustering/widget_file.html' %}" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width:900px;height: 550px">
+            {{ source2 }}
+            
+        
+        
+        <!--<script src="% static 'assets/js/map.js' %"></script>-->
+        <script>
+function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}
+ </script>
+        
+        </center>
+        </form>
+        <hr>
+        <button class="btn btn-brand" onclick="saveSVG()">Download Map</button>
+        <script src="{% static 'assets/js/saveSvgAsPng.js' %}"></script>
+        <script>function saveSVG(){ saveSvgAsPng(document.getElementById("map"), "moira.png"); }</script>
+        <br><br>
+            
+        
+        
+        <hr>
+        <h6>Query:</h6>
+        {{ query }}
+    </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Data Query{% endblock title %}
+{% block content %}
+{% load static %}
+<section class="module"  style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <!-- The Modal -->
+    <div id="loading" class="modal">
+        <center>
+        <!-- Modal content -->
+        <div class="modal-dialog-centered">
+
+            <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+            <br><br>
+            <h4 style="color: aliceblue">Please Wait</h4>
+            <p style="color: aliceblue">Fetching data...</p>
+            <br><br>
+            </div>
+
+
+        </div>
+        </center>
+    </div>
+    <div class="container">
+    
+    <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row">
+        <div class="col-md-8">
+            <h4>MOIRA Query Form</h4><hr>
+            <div class="accordion" id="accordion1">
+            <div class="accordion-item">
+               <div class="accordion-item-header">
+                  <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+               </div>
+               <div class="collapse show" id="collapse-1" data-parent="#accordion1">
+                  <div class="accordion-item-body">
+                      
+                      Year Range:&nbsp;&nbsp;
+                      {{ form.year1 }}
+                      &nbsp;&nbsp;<small>-</small>&nbsp;&nbsp;
+                      {{ form.year2 }}
+                      &nbsp;&nbsp;&nbsp;
+                      Period Duration:
+                      {{ form.period }}
+                  </div> 
+                </div>
+            </div>
+            <div class="accordion-item">
+               <div class="accordion-item-header">
+                  <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-2" class="" aria-expanded="false">Geographic Detail</a></h6>
+               </div>
+               <div class="collapse" id="collapse-2" data-parent="#accordion1">
+                  <div class="accordion-item-body">
+                      {{ form.geoLevel }}
+                      States:
+                      {{ form.abbreviatedStates }}
+                      <hr>
+                      Select Counties:<br>
+                      {{ form.allCounties }}&nbsp;&nbsp;<a>Select all counties within specified states</a>
+                      <div class="container" id="countybox" style="background-color:rgba(245, 244, 245, 1);overflow-y: scroll; height:300px">
+                       <b>Alabama</b>
+                        {{ form.ALselect }}
+                        <b>Alaska</b>
+                        {{ form.AKselect }}
+                        <b>Arizona</b>
+                        {{ form.AZselect }}
+                        <b>Arkansas</b>
+                        {{ form.ARselect }}
+                        <b>California</b>
+                        {{ form.CAselect }}
+                        <b>Colorado</b>
+                        {{ form.COselect }}
+                        <b>Connecticut</b>
+                        {{ form.CTselect }}
+                        <b>Delaware</b>
+                        {{ form.DEselect }}
+                        <b>District of Columbia</b>
+                        {{ form.DCselect }}
+                        <b>Florida</b>
+                        {{ form.FLselect }}
+                        <b>Georgia</b>
+                        {{ form.GAselect }}
+                        <b>Hawaii</b>
+                        {{ form.HIselect }}
+                        <b>Idaho</b>
+                        {{ form.IDselect }}
+                        <b>Illinois</b>
+                        {{ form.ILselect }}
+                        <b>Indiana</b>
+                        {{ form.INselect }}
+                        <b>Iowa</b>
+                        {{ form.IAselect }}
+                        <b>Kansas</b>
+                        {{ form.KSselect }}
+                        <b>Kentucky</b>
+                        {{ form.KYselect }}
+                        <b>Louisiana</b>
+                        {{ form.LAselect }}
+                        <b>Maine</b>
+                        {{ form.MEselect }}
+                        <b>Maryland</b>
+                        {{ form.MDselect }}
+                        <b>Massachusetts</b>
+                        {{ form.MAselect }}
+                        <b>Michigan</b>
+                        {{ form.MIselect }}
+                        <b>Minnesota</b>
+                        {{ form.MNselect }}
+                        <b>Mississippi</b>
+                        {{ form.MSselect }}
+                        <b>Missouri</b>
+                        {{ form.MOselect }}
+                        <b>Montana</b>
+                        {{ form.MTselect }}
+                        <b>Nebraska</b>
+                        {{ form.NEselect }}
+                        <b>Nevada</b>
+                        {{ form.NVselect }}
+                        <b>New Hampshire</b>
+                        {{ form.NHselect }}
+                        <b>New Jersey</b>
+                        {{ form.NJselect }}
+                        <b>New Mexico</b>
+                        {{ form.NMselect }}
+                        <b>New York</b>
+                        {{ form.NYselect }}
+                        <b>North Carolina</b>
+                        {{ form.NCselect }}
+                        <b>North Dakota</b>
+                        {{ form.NDselect }}
+                        <b>Ohio</b>
+                        {{ form.OHselect }}
+                        <b>Oklahoma</b>
+                        {{ form.OKselect }}
+                        <b>Oregon</b>
+                        {{ form.ORselect }}
+                        <b>Pennsylvania</b>
+                        {{ form.PAselect }}
+                        <b>Rhode Island</b>
+                        {{ form.RIselect }}
+                        <b>South Carolina</b>
+                        {{ form.SCselect }}
+                        <b>South Dakota</b>
+                        {{ form.SDselect }}
+                        <b>Tennessee</b>
+                        {{ form.TNselect }}
+                        <b>Texas</b>
+                        {{ form.TXselect }}
+                        <b>Utah</b>
+                        {{ form.UTselect }}
+                        <b>Vermont</b>
+                        {{ form.VTselect }}
+                        <b>Virginia</b>
+                        {{ form.VAselect }}
+                        <b>Washington</b>
+                        {{ form.WAselect }}
+                        <b>West Virginia</b>
+                        {{ form.WVselect }}
+                        <b>Wisconsin</b>
+                        {{ form.WIselect }}
+                        <b>Wyoming</b>
+                        {{ form.WYselect }}
+                      </div>
+                      <!-- make this appear only when County is selected-->
+                      
+                  </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+               <div class="accordion-item-header">
+                  <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+               </div>
+               <div class="collapse" id="collapse-3" data-parent="#accordion1">
+                  <div class="accordion-item-body">
+                      <p>Choose from ONE group:</p>
+                      OCMAP 63 <b>(Available all time periods)</b>
+                      {{ form.cod }}
+                      <hr>
+                      MOIRA 113 <b>(Available between 1979 - 2017)</b>
+                      {{ form.cod113 }}
+                      <hr>
+                      <!--<small>Custom Cause of Death:</small>-->
+                      
+                  </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-item-header">
+                  <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-5" class="" aria-expanded="false">Demographics</a></h6>
+               </div>
+               <div class="collapse" id="collapse-5" data-parent="#accordion5">
+                  <div class="accordion-item-body">
+                      <p>Choose from ONE set:</p>
+                      12 Age Groups: <b>(Available all time periods)</b>
+                      {{ form.ageGroup12 }}
+                      <hr>
+                      13 Age Groups: <b>(Available between 1968 - 2017)</b>
+                      {{ form.ageGroup13 }}
+                      <hr>
+                      {{ form.sex }}
+                      {{ form.race }}
+                      {{ form.hispanicOrigin }}
+                      
+                  </div> 
+                </div>
+            </div>
+            <div class="accordion-item">
+               <div class="accordion-item-header">
+                  <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-6" class="" aria-expanded="false">Group Results By</a></h6>
+               </div>
+               <div class="collapse" id="collapse-6" data-parent="#accordion6">
+                  <div class="accordion-item-body">
+                      {{ form.groupBy }}
+                  </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+               <div class="accordion-item-header">
+                  <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Other</a></h6>
+               </div>
+               <div class="collapse" id="collapse-4" data-parent="#accordion1">
+                  <div class="accordion-item-body">
+
+                      {{ form.ageAdjustment }} <a>Age Adjusted</a>
+                    <hr>
+                      <small>Calculate Rates Per:</small>
+                      {{ form.ratesPer}}
+                      
+                  </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container" style="background-color: rgba(251, 234, 234, 1)">
+       <br>         
+    <h5><b>NOTE:</b></h5>Years 1979 to 2017:
+    <ul>
+      <li>The 113 Cause of Death list is available.</li>
+    </ul>
+    <hr>
+    Years 1968 to 1999:<br>
+    <ul>
+      <li><strong>Hispanic:</strong> selection not available</li>
+      <li><strong>Race:</strong> 'White', 'Black', 'Other' only</li>
+    </ul>
+                <hr>
+    Years prior to 1968:<br>
+    <ul>
+      <li><strong>Hispanic:</strong> selection not available</li>
+      <li><strong>Race:</strong> 'White' or 'Non-White' only</li>
+      <li><strong>Age Group:</strong> 12 Age Groups only</li>
+    </ul>
+            <hr>
+    <strong>Prior to 1962, only cancer related deaths are reported.</strong>
+    <br><strong>Alaska and Hawaii data is not available before 1960.</strong>
+    <br><strong>New Jersey data is not available from 1962-1963.</strong>
+  
+            </div>
+            
+            <hr>
+            &nbsp;&nbsp;<button class="btn btn-brand" type="submit">Get data</button>
+            
+            &nbsp;&nbsp;<button class="btn btn-brand" type="reset">&nbsp;<a href="rates" style="color: azure">Reset</a>&nbsp;</button>
+        </div>
+        </div>
+    </form>   
+        <script>
+        function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}
+        </script>
+        <p>Results:</p>
+        <hr>
+        <div class="row">
+            
+            <div class="col-md-8">
+            {{ alerts }}
+            <div class="container" id="results" style="background-color: white; height:400px; overflow-y: scroll">
+                {% load static %}
+                <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+                            <table class="table table-striped table-hover ">
+                  {{ text }}
+                </table>
+                        </div>
+            <small>
+            {{ query }}<br>
+            {{ age }}
+            </small>
+            </div>
+            
+            <div class="col-md-4">
+            <div class="container">
+                <br>
+                <strong>Citation:</strong>
+                <br>
+                <small>University of Pittsburgh. (2019). Mortality Information and Research Analytics (Version 2.0) [All Cuases of Death by Hispanic Origin, 2000-2010]. Retreived from https://moira.pitt.edu/app/rates</small>
+                <br>
+                <hr>
+                <script>
+function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV file
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Hide download link
+    downloadLink.style.display = "none";
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+
+    // Click download link
+    downloadLink.click();
+}
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+                
+                </script>
+                <button onClick="exportTableToCSV('moira_data.csv')" class="btn btn-brand">Download CSV</button>
+            </div>    
+            
+            </div>
+        </div>
+        
+
+    
+    </div>
+</section>
+
+
+{% endblock content %}

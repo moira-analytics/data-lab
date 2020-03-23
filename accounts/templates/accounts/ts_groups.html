@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Data Lab{% endblock title %}
+{% block content %}
+
+<section class="module" style="background: linear-gradient(180deg, rgba(9,86,121,1) 0%, rgba(48,44,94,0) 11%)">
+        <div class="container">
+        <center><h2><strong>MOIRA Data Lab:</strong> Time Series Analysis</h2></center>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href="raceSex"><div class="icon-box-icon">
+                       
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="96" height="96"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="29.5625" y1="28.21875" x2="29.5625" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="67.1875" y1="28.21875" x2="67.1875" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="104.8125" y1="28.21875" x2="104.8125" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="142.4375" y1="28.21875" x2="142.4375" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="29.5625" y1="114.66756" x2="29.5625" y2="138.87119" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="67.1875" y1="88.23869" x2="67.1875" y2="137.52744" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="104.8125" y1="55.98869" x2="104.8125" y2="137.51669" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="142.4375" y1="103.46875" x2="142.4375" y2="138.86581" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient></defs><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g id="original-icon"><path d="M37.625,88.6875h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v26.875c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-26.875v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM21.5,94.0625h16.125v5.375v0h-16.125zM37.63038,137.0625h-16.13037v-26.875v-5.375h16.125v5.375h0.00269z" fill="url(#color-1)"></path><path d="M75.25,61.8125h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v53.75c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-53.75v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM59.125,67.1875h16.125v5.375v0h-16.125zM75.25538,137.0625h-16.13037v-53.75v-5.375h16.125v5.375v0z" fill="url(#color-2)"></path><path d="M112.875,29.5625h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v86c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-86v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM96.75,34.9375h16.125v5.375v0h-16.125zM112.88038,137.0625h-16.13037v-86v-5.375h16.125v5.375v0z" fill="url(#color-3)"></path><path d="M150.5,77.9375h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v37.625c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-37.625v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM134.375,83.3125h16.125v5.375v0h-16.125zM150.50538,137.0625h-16.13038v-37.625v-5.375h16.125v5.375h0.00269z" fill="url(#color-4)"></path><path d="M26.875,115.5625h5.375v21.5h-5.375z" fill="url(#color-5)"></path><path d="M64.5,88.6875h5.375v48.375h-5.375z" fill="url(#color-6)"></path><path d="M102.125,56.4375h5.375v80.625h-5.375z" fill="url(#color-7)"></path><path d="M139.75,104.8125h5.375v32.25h-5.375z" fill="url(#color-8)"></path></g><path d="" fill="none"></path></g></g></svg>
+                       </div></a>
+                   <div class="icon-box-title">
+                       <h6>Race and Sex</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Plot mortality rates for available Race and Sex categoriews over time. </p>
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href="ses"><div class="icon-box-icon">
+                       
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="96" height="96"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="29.5625" y1="28.21875" x2="29.5625" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="67.1875" y1="28.21875" x2="67.1875" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="104.8125" y1="28.21875" x2="104.8125" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="142.4375" y1="28.21875" x2="142.4375" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="29.5625" y1="114.66756" x2="29.5625" y2="138.87119" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="67.1875" y1="88.23869" x2="67.1875" y2="137.52744" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="104.8125" y1="55.98869" x2="104.8125" y2="137.51669" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="142.4375" y1="103.46875" x2="142.4375" y2="138.86581" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient></defs><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g id="original-icon"><path d="M37.625,88.6875h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v26.875c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-26.875v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM21.5,94.0625h16.125v5.375v0h-16.125zM37.63038,137.0625h-16.13037v-26.875v-5.375h16.125v5.375h0.00269z" fill="url(#color-1)"></path><path d="M75.25,61.8125h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v53.75c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-53.75v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM59.125,67.1875h16.125v5.375v0h-16.125zM75.25538,137.0625h-16.13037v-53.75v-5.375h16.125v5.375v0z" fill="url(#color-2)"></path><path d="M112.875,29.5625h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v86c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-86v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM96.75,34.9375h16.125v5.375v0h-16.125zM112.88038,137.0625h-16.13037v-86v-5.375h16.125v5.375v0z" fill="url(#color-3)"></path><path d="M150.5,77.9375h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v37.625c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-37.625v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM134.375,83.3125h16.125v5.375v0h-16.125zM150.50538,137.0625h-16.13038v-37.625v-5.375h16.125v5.375h0.00269z" fill="url(#color-4)"></path><path d="M26.875,115.5625h5.375v21.5h-5.375z" fill="url(#color-5)"></path><path d="M64.5,88.6875h5.375v48.375h-5.375z" fill="url(#color-6)"></path><path d="M102.125,56.4375h5.375v80.625h-5.375z" fill="url(#color-7)"></path><path d="M139.75,104.8125h5.375v32.25h-5.375z" fill="url(#color-8)"></path></g><path d="" fill="none"></path></g></g></svg>
+                       </div></a>
+                   <div class="icon-box-title">
+                       <h6>Socioeconomic Regions</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Compare mortality rates in urban, semi-urban and rural areas by socioeconomic status. See <a href="docs">documentation</a> for a description of regional socioeconomic classification.</p>
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href="countytime"><div class="icon-box-icon">
+                       
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="96" height="96"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="29.5625" y1="28.21875" x2="29.5625" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="67.1875" y1="28.21875" x2="67.1875" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="104.8125" y1="28.21875" x2="104.8125" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="142.4375" y1="28.21875" x2="142.4375" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="29.5625" y1="114.66756" x2="29.5625" y2="138.87119" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="67.1875" y1="88.23869" x2="67.1875" y2="137.52744" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="104.8125" y1="55.98869" x2="104.8125" y2="137.51669" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="142.4375" y1="103.46875" x2="142.4375" y2="138.86581" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient></defs><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g id="original-icon"><path d="M37.625,88.6875h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v26.875c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-26.875v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM21.5,94.0625h16.125v5.375v0h-16.125zM37.63038,137.0625h-16.13037v-26.875v-5.375h16.125v5.375h0.00269z" fill="url(#color-1)"></path><path d="M75.25,61.8125h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v53.75c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-53.75v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM59.125,67.1875h16.125v5.375v0h-16.125zM75.25538,137.0625h-16.13037v-53.75v-5.375h16.125v5.375v0z" fill="url(#color-2)"></path><path d="M112.875,29.5625h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v86c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-86v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM96.75,34.9375h16.125v5.375v0h-16.125zM112.88038,137.0625h-16.13037v-86v-5.375h16.125v5.375v0z" fill="url(#color-3)"></path><path d="M150.5,77.9375h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v37.625c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-37.625v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM134.375,83.3125h16.125v5.375v0h-16.125zM150.50538,137.0625h-16.13038v-37.625v-5.375h16.125v5.375h0.00269z" fill="url(#color-4)"></path><path d="M26.875,115.5625h5.375v21.5h-5.375z" fill="url(#color-5)"></path><path d="M64.5,88.6875h5.375v48.375h-5.375z" fill="url(#color-6)"></path><path d="M102.125,56.4375h5.375v80.625h-5.375z" fill="url(#color-7)"></path><path d="M139.75,104.8125h5.375v32.25h-5.375z" fill="url(#color-8)"></path></g><path d="" fill="none"></path></g></g></svg>
+                       </div></a>
+                   <div class="icon-box-title">
+                       <h6>US Counties</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Compare mortality rates for different counties or states over time</p>
+                   </div>
+                </div>
+            </div>
+        </div>    
+        
+        <hr>
+
+        
+        
+            
+        </div>
+        
+            
+    
+            
+</section>  
+
+{% endblock content %}

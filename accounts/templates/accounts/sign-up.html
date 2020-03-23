@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Register{% endblock title %}
+{% block content %}
+<!-- Hero-->
+{% load static %}
+<section class="module-cover parallax fullscreen text-center" data-background="{% static 'assets/images/module-16.jpg' %}" data-overlay="0.65" data-gradient="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 m-auto">
+                            <div class="m-b-20">
+                                <h6>Create a new account</h6>
+                            </div>
+                            <div class="m-b-20">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ form.username }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.password1 }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form.password2 }}
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="m-b-20">
+                                <p><small>By signing up, you agree to the <a href="#">terms of service</a></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+  
+
+{% endblock content %}

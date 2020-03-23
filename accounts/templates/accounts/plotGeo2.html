@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | GeoAnalytics{% endblock title %}
+{% block content %}
+
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div class="container">
+    </div>
+    <div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicmFhbmFuLWciLCJhIjoiY2pyMWF5YzM4MDBseTQzcXEyZ3gxN2xvOSJ9.Jm_gHZ3zcJh2xygKeOdr5w';
+    
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/raanan-g/ck5y332z310cm1ip2q4d8jw3m',
+        center: [38.437,-95.731],
+        zoom: 4.00
+    });
+    
+    
+    
+    
+</script>
+
+</section>
+
+
+{% endblock content %}

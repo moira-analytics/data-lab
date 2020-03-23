@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | SES{% endblock title %}
+{% block content %}
+{% load static %}
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div id="loading" class="modal">
+                <center>
+                <!-- Modal content -->
+                <div class="modal-dialog-centered">
+                    
+                    <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+                    <br><br>
+                    <h4 style="color: aliceblue">Please Wait</h4>
+                    <p style="color: aliceblue">Fetching data...</p>
+                    <br><br>
+                    </div>
+                    
+                    
+                </div>
+                </center>
+    </div>
+    <div class="container">
+    
+    {{ alerts }}
+        
+      <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row" style="height:100px">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        {{ ses_form.title_4 }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-brand" type="submit">Create Plot</button>
+            
+        <button class="btn btn-brand" href="raceSex" type="reset"><a style="color:azure" href="ses">New Query</a></button>           
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+                   </div>
+                   <div class="collapse show" style="position: absolute; width:350px" id="collapse-1" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+                          <small>Year Range:</small>
+                          {{ ses_form.year1_4 }}
+                          <small>-</small>
+                          {{ ses_form.year2_4 }}
+                          <br><hr><p></p>
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion3">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-3" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        <p>Choose from ONE group:</p>
+                      <small>OCMAP 63 <b>(Available all time periods)</b></small>
+                      {{ ses_form.cod_4 }}
+                      <hr>
+                      <small>MOIRA 113 <b>(Available between 1979 - 2017)</b></small>
+                      {{ ses_form.cod113_4 }}
+                      <hr>
+                      <small>Custom Cause of Death:</small>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+
+        </div>
+
+    
+        <center>
+
+        
+        <br><br>
+        
+        
+        <div class="container" id="chart" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width:900px;height: 400px; background-color: white">
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <style> /* set the CSS */
+
+          .grid line {
+            stroke: lightgrey;
+            stroke-opacity: 0.9;
+            shape-rendering: crispEdges
+          }
+          .grid path {
+            stroke-width: 0;
+          }
+        </style>
+            <script>
+             function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}   
+
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 70, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// Parse the date / time
+var parseDate = d3.timeParse("%Y");
+
+// Set the ranges
+var x = d3.scaleTime().range([0, width]);  
+var y = d3.scaleLinear().range([height-100, 0]);
+
+// Define the line
+var rate_line = d3.line()	
+    .x(function(d) { return x(d.Time_Period_Label); })
+    .y(function(d) { return y(d.Age_Adjusted_Rate); });       
+
+// Adds the svg canvas
+var svg = d3.select("#chart")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + (margin.top + 30) + ")");
+    
+function make_x_gridlines() {		
+    return d3.axisBottom(x)
+        .ticks(10)
+}
+
+// gridlines in y axis function
+function make_y_gridlines() {		
+    return d3.axisLeft(y)
+        .ticks(10)
+}
+                
+// Get the data         
+d3.csv('{% static 'temp_result.csv' %}', function(error, data){
+    data.forEach(function(d) {
+		d.Time_Period_Label = parseDate(d.Time_Period_Label);
+		d.Age_Adjusted_Rate = +d.Age_Adjusted_Rate;
+    });
+    
+    console.log(data)
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.Time_Period_Label; }));
+    y.domain([0, d3.max(data, function(d) { return d.Age_Adjusted_Rate; })]);
+    
+    // Nest the entries by symbol
+    var dataNest = d3.nest()
+        .key(function(d) {return d.Group_Name;})
+        .entries(data);
+
+    // set the colour scale
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    legendSpace = width/dataNest.length; // spacing for the legend
+    //legendSpots = 
+    // Loop through each symbol / key
+    
+    svg.append("rect")
+        .attr("width", "88%")
+        .attr("height", "55%")
+        .attr("transform","translate(0,-5)")
+        .attr("fill", "rgba(214, 214, 214, 0.2)");
+    
+      // add the X gridlines
+    svg.append("g")			
+      .attr("class", "grid")
+      .attr("height","100%")
+      .attr("stroke-width","0.5px")
+      .attr("transform", "translate(0,200)")
+      .call(make_x_gridlines()
+          .tickSize(-210,0,0)
+          .tickFormat("")
+      )
+
+      // add the Y gridlines
+    svg.append("g")			
+        .attr("class", "grid")
+        .attr("stroke-width","0.5px")
+        .call(make_y_gridlines()
+          .tickSize(-width)
+          .tickFormat("")
+    )
+      // text label for the y axis
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height/2.75))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("AAR Per 100,000"); 
+    
+    dataNest.forEach(function(d,i) { 
+        
+        svg.append("path")
+            .attr("class", "line")
+            .attr("fill", "none")
+            .attr("stroke-width", "3px")
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .attr("d", rate_line(d.values));
+        
+        var down = 0;
+        
+        if (i > 3) {
+            down = 220;
+            i = i-4;
+        }
+        
+                // Add the Legend
+        svg.append("text")
+            .attr("x", (legendSpace) + down - 40)  // space legend
+            .attr("y", height + (i*20) - 55)
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .text(d.key); 
+        
+        
+        // Add the Legend
+        svg.append("line")
+            .attr("x1", (legendSpace/2)+down - 40)
+            .attr("x2", (legendSpace/2)+down-20)
+            .attr("y1", height + (i*20) - 60)
+            .attr("y2", height + (i*20) - 60)
+            .attr("stroke-width", "3px")    // style the legend
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); });
+            
+
+    });
+    
+    
+    
+    // Add the X Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,200)")
+      .call(d3.axisBottom(x));
+
+    // Add the Y Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y));
+    
+    svg.append("text")
+        .attr("x", 250)             
+        .attr("y", -20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "18px") 
+        .style("text-decoration", "bold")  
+        .text("{{ title }}");
+    
+    
+});
+                       
+            </script>
+        </div>
+        </center>
+        <hr>
+        
+    
+     </form> 
+        <button class="btn btn-brand" onclick="saveSVG()">Download Chart</button>
+        <script src="{% static 'assets/js/saveSvgAsPng.js' %}"></script>
+        <script>function saveSVG(){ saveSvgAsPng(document.querySelector("svg"), "moira.png");}</script>
+         <br><br>
+        <small>{{ text }}</small>
+        
+
+    </div>
+</section>
+
+
+{% endblock content %}

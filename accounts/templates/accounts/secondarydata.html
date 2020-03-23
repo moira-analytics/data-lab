@@ -1,0 +1,593 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | GeoAnalytics{% endblock title %}
+{% block content %}
+
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div id="loading" class="modal">
+                <center>
+                <!-- Modal content -->
+                <div class="modal-dialog-centered">
+                    
+                    <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+                    <br><br>
+                    <h4 style="color: aliceblue">Please Wait</h4>
+                    <p style="color: aliceblue">Fetching data...</p>
+                    <br><br>
+                    </div>
+                    
+                    
+                </div>
+                </center>
+            </div>
+    <div class="container">
+    
+    {{ alerts }}
+        
+    <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row" style="height:100px">
+        <div class="col-md-4">
+        <p>Plot:</p>
+        {{ geo_form.plot }}
+        </div>
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        {{ geo_form.title }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;
+            
+
+            <button id="formsubmit" class="btn btn-brand" onclick="formSubmit" type="submit">Create Map</button>
+            
+            <button class="btn btn-brand" href="geo" type="reset"><a style="color:azure" href="geo">New Query</a></button>    
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+                   </div>
+                   <div class="collapse show" style="position: absolute; width:350px" id="collapse-1" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+                          <small>Year Range:</small>
+                          {{ geo_form.year1_8 }}
+                          <small>-</small>
+                          {{ geo_form.year2_8 }}
+                          <br><hr><p></p>
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion2">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-2" class="" aria-expanded="false">Geography</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:290px" id="collapse-2" data-parent="#accordion2">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                                                {{ geo_form.geoLevel_8 }}
+                      <small>States:</small>
+                      {{ geo_form.abbreviatedStates_8 }}
+                      <hr>
+                      <small>Select Counties:</small><br>
+                      <a>Find Specific Counties:</a>
+                      <div class="container" id="countybox" style="background-color:rgba(245, 244, 245, 1);overflow-y: scroll; height:300px">
+                      <small>Alabama</small>
+                        {{ geo_form.ALselect_8 }}
+                        <small>Alaska</small>
+                        {{ geo_form.AKselect_8 }}
+                        <small>Arizona</small>
+                        {{ geo_form.AZselect_8 }}
+                        <small>Arkansas</small>
+                        {{ geo_form.ARselect_8 }}
+                        <small>California</small>
+                        {{ geo_form.CAselect_8 }}
+                        <small>Colorado</small>
+                        {{ geo_form.COselect_8 }}
+                        <small>Connecticut</small>
+                        {{ geo_form.CTselect_8 }}
+                        <small>Delaware</small>
+                        {{ geo_form.DEselect_8 }}
+                        <small>District of Columbia</small>
+                        {{ geo_form.DCselect_8 }}
+                        <small>Florida</small>
+                        {{ geo_form.FLselect_8 }}
+                        <small>Georgia</small>
+                        {{ geo_form.GAselect_8 }}
+                        <small>Hawaii</small>
+                        {{ geo_form.HIselect_8 }}
+                        <small>Idaho</small>
+                        {{ geo_form.IDselect_8 }}
+                        <small>Illinois</small>
+                        {{ geo_form.ILselect_8 }}
+                        <small>Indiana</small>
+                        {{ geo_form.INselect_8 }}
+                        <small>Iowa</small>
+                        {{ geo_form.IAselect_8 }}
+                        <small>Kansas</small>
+                        {{ geo_form.KSselect_8 }}
+                        <small>Kentucky</small>
+                        {{ geo_form.KYselect_8 }}
+                        <small>Louisiana</small>
+                        {{ geo_form.LAselect_8 }}
+                        <small>Maine</small>
+                        {{ geo_form.MEselect_8 }}
+                        <small>Maryland</small>
+                        {{ geo_form.MDselect_8 }}
+                        <small>Massachusetts</small>
+                        {{ geo_form.MAselect_8 }}
+                        <small>Michigan</small>
+                        {{ geo_form.MIselect_8 }}
+                        <small>Minnesota</small>
+                        {{ geo_form.MNselect_8 }}
+                        <small>Mississippi</small>
+                        {{ geo_form.MSselect_8 }}
+                        <small>Missouri</small>
+                        {{ geo_form.MOselect_8 }}
+                        <small>Montana</small>
+                        {{ geo_form.MTselect_8 }}
+                        <small>Nebraska</small>
+                        {{ geo_form.NEselect_8 }}
+                        <small>Nevada</small>
+                        {{ geo_form.NVselect_8 }}
+                        <small>New Hampshire</small>
+                        {{ geo_form.NHselect_8 }}
+                        <small>New Jersey</small>
+                        {{ geo_form.NJselect_8}}
+                        <small>New Mexico</small>
+                        {{ geo_form.NMselect_8 }}
+                        <small>New York</small>
+                        {{ geo_form.NYselect_8 }}
+                        <small>North Carolina</small>
+                        {{ geo_form.NCselect_8 }}
+                        <small>North Dakota</small>
+                        {{ geo_form.NDselect_8 }}
+                        <small>Ohio</small>
+                        {{ geo_form.OHselect_8}}
+                        <small>Oklahoma</small>
+                        {{ geo_form.OKselect_8 }}
+                        <small>Oregon</small>
+                        {{ geo_form.ORselect_8 }}
+                        <small>Pennsylvania</small>
+                        {{ geo_form.PAselect_8 }}
+                        <small>Rhode Island</small>
+                        {{ geo_form.RIselect_8 }}
+                        <small>South Carolina</small>
+                        {{ geo_form.SCselect_8 }}
+                        <small>South Dakota</small>
+                        {{ geo_form.SDselect_8 }}
+                        <small>Tennessee</small>
+                        {{ geo_form.TNselect_8 }}
+                        <small>Texas</small>
+                        {{ geo_form.TXselect_8 }}
+                        <small>Utah</small>
+                        {{ geo_form.UTselect_8}}
+                        <small>Vermont</small>
+                        {{ geo_form.VTselect_8 }}
+                        <small>Virginia</small>
+                        {{ geo_form.VAselect_8 }}
+                        <small>Washington</small>
+                        {{ geo_form.WAselect_8 }}
+                        <small>West Virginia</small>
+                        {{ geo_form.WVselect_8 }}
+                        <small>Wisconsin</small>
+                        {{ geo_form.WIselect_8 }}
+                        <small>Wyoming</small>
+                        {{ geo_form.WYselect_8 }}    
+                      </div>
+                      <!-- make this appear only when County is selected-->
+                      
+
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion3">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-3" data-parent="#accordion3">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        <p>Choose from ONE group:</p>
+                      <small>OCMAP 63 <b>(Available all time periods)</b></small>
+                      {{ geo_form.cod_8 }}
+                      <hr>
+                      <small>MOIRA 113 <b>(Available between 1979 - 2017)</b></small>
+                      {{ geo_form.cod113_8 }}
+                      <hr>
+                      <small>Custom Cause of Death:</small>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+        <!--   
+        <div class="col-md-3">
+                <br>
+            <div class="accordion" id="accordion4">  
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body">
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion4">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:350px" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion5">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-5" class="" aria-expanded="false">Rate Calculation</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:290px" id="collapse-5" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+=
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion6">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-6" class="" aria-expanded="false">Map Options</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-6" data-parent="#accordion6">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  -->
+        <!--   
+        <div class="col-md-3">
+                <br>
+            <div class="accordion" id="accordion4">  
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-4" class="" aria-expanded="false">Demographics</a></h6>
+                   </div>
+                   <div class="collapse" id="collapse-4" data-parent="#accordion1">
+                      <div class="accordion-item-body">
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>    -->
+        </div>
+        <center><div class="container" id="viz" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width:900px;height: 550px; background-color: white">
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+        <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+        
+        <svg id="map" class="zoom" style="height: 100%; width: 80%"><image id="canvas"></image></svg>
+        <!-- Load d3.js -->
+        
+        {% load static %}
+        <!--<script src="% static 'assets/js/map.js' %"></script>-->
+        <script>
+ function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}   
+            
+window.onload = () => {
+    //init
+    initUS();
+}
+
+const svg = d3.select("svg"),
+    svg2 = d3.select("#bubblemap"),
+    margin = 10,
+    width = +svg.attr("width") - margin,
+    height = +svg.attr("height") - margin;
+
+function legend({
+  color,
+  title,
+  tickSize = 6,
+  width = 320, 
+  height = 44 + tickSize,
+  marginTop = 18,
+  marginRight = 0,
+  marginBottom = 16 + tickSize,
+  marginLeft = 0,
+  ticks = width / 64,
+  tickFormat,
+  tickValues
+} = {}) {
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .style("overflow", "visible")
+      .style("display", "block");  
+  let x;
+  // Continuous
+  if (color.interpolator) {
+    x = Object.assign(color.copy()
+        .interpolator(d3.interpolateRound(marginLeft, width - marginRight)),
+        {range() { return [marginLeft, width - marginRight]; }});
+
+    svg.append("image")
+        .attr("x", marginLeft)
+        .attr("y", marginTop)
+        .attr("width", width * 1.17)
+        .attr("height", 800)
+        .attr("preserveAspectRatio", "none")
+        .attr("xlink:href", ramp(color.interpolator()).toDataURL());
+
+    // scaleSequentialQuantile doesn’t implement ticks or tickFormat.
+    if (!x.ticks) {
+      if (tickValues === undefined) {
+        const n = Math.round(ticks + 1);
+        tickValues = d3.range(n).map(i => d3.quantile(color.domain(), i / (n - 1)));
+      }
+      if (typeof tickFormat !== "function") {
+        tickFormat = d3.format(tickFormat === undefined ? ",f" : tickFormat);
+      }
+    }
+  }
+  // Discrete
+  else if (color.invertExtent) {
+    const thresholds
+        = color.thresholds ? color.thresholds() // scaleQuantize
+        : color.quantiles ? color.quantiles() // scaleQuantile
+        : color.domain(); // scaleThreshold
+
+    const thresholdFormat
+        = tickFormat === undefined ? d => d
+        : typeof tickFormat === "string" ? d3.format(tickFormat)
+        : tickFormat;
+
+    x = d3.scaleLinear()
+        .domain([-1, color.range().length - 1])
+        .rangeRound([marginLeft, width - marginRight]);
+
+    svg.append("g")
+      .selectAll("rect")
+      .data(color.range())
+      .join("rect")
+        .attr("x", (d, i) => x(i - 1))
+        .attr("y", marginTop)
+        .attr("width", (d, i) => x(i) - x(i - 1))
+        .attr("height", height - marginTop - marginBottom)
+        .attr("fill", d => d);
+
+    tickValues = d3.range(thresholds.length);
+    tickFormat = i => thresholdFormat(thresholds[i], i);
+  }
+
+  svg.append("g")
+      .attr("transform", `translate(0, ${height - marginBottom})`)
+      .call(d3.axisBottom(x)
+        .ticks(ticks, typeof tickFormat === "string" ? tickFormat : undefined)
+        .tickFormat(typeof tickFormat === "function" ? tickFormat : undefined)
+        .tickSize(tickSize)
+        .tickValues(tickValues))
+      .call(g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.append("text")
+        .attr("y", marginTop + marginBottom - height - 6)
+        .attr("fill", "currentColor")
+        .attr("text-anchor", "start")
+        .attr("font-weight", "bold")
+        .text(title));
+
+  return svg.node();
+}
+         
+function ramp(color, n = 256) {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  for (let i = 0; i < n; ++i) {
+    context.fillStyle = color(i / (n - 1));
+    context.fillRect(i, 0, 1, 1);
+  }
+  return canvas;
+}
+                        
+function initUS() {
+    
+    // Load external data and boot
+    
+    Promise.all(
+            [
+                d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json"),
+                d3.csv('{% static 'temp_result.csv' %}')
+            ])
+        .then(d => ready(null, d[0], d[1]))
+
+    function ready(error, us, moira_data) {
+        
+        const counties = topojson.feature(us, us.objects.counties).features;
+        const states_ = topojson.feature(us, us.objects.states).features;
+        const states = new Map(us.objects.states.geometries.map(d => [d.id, d.properties]));
+        // Map and projection
+        const projection = d3.geoAlbersUsa().scale(750).translate([350, 250])
+        //const path = d3.geoPath();
+        const path = d3.geoPath(projection);
+        // Map data to d3 objects
+        const data = Object.assign(new Map(moira_data.map(({
+            Formatted_FIPS, 
+            Unemployment_Rate
+        }) => [Formatted_FIPS, +Unemployment_Rate])), 
+            {value: moira_data["Unemployment_Rate"], title: "           Unemployment Rate"
+        })
+        const bubble_data = Object.assign(new Map(moira_data.map(({
+            Formatted_FIPS, 
+            Age_Adjusted_Rate
+        }) => [Formatted_FIPS, +Age_Adjusted_Rate])), 
+            {value: moira_data["Age_Adjusted_Rate"], title: "Age Adjusted Mortality Rate (Per 1,000)"
+        })
+        console.log(moira_data)
+        console.log(us)
+        console.log(data)
+        console.log(bubble_data)
+        // set scale and color
+        const extent = d3.extent(Array.from(data.values()).map(i => i.value));
+        const bubble_extent = d3.extent(Array.from(bubble_data.values()).map(i => i.value));
+        console.log(bubble_extent);
+        const color = d3.scaleSequentialQuantile([...data.values()], t => d3.interpolatePiYG(1 - t))
+        const radius = d3.scaleSqrt([0, d3.quantile([...bubble_data.values()].sort(d3.ascending), 0.985)], [0, 8]);
+
+        console.log(color)
+        
+        {{ legend }}
+        
+        
+        
+        
+
+        
+        svg.append("text")
+            .attr("x", 350)             
+            .attr("y", 40)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "18px") 
+            .style("text-decoration", "bold")  
+            .text("{{ title }}");
+        
+        //var citation = \n https://moira.pitt.edu"
+        
+        /*svg.append("text")
+            .attr("x", 500)             
+            .attr("y", 470)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "7px") 
+            //.style("text-decoration", "underline")  
+            .text("Mortality Information and Research Analytics.");
+        
+        svg.append("text")
+            .attr("x", 498)             
+            .attr("y", 479)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "7px") 
+            //.style("text-decoration", "underline")  
+            .text("University of Pittsburgh. 2019 Dec 1. Retrieved:");
+ 
+        svg.append("text")
+            .attr("x", 458)             
+            .attr("y", 488)
+            .attr("text-anchor", "middle")  
+            .style("font-size", "7px") 
+            //.style("text-decoration", "underline")  
+            .text("https://moira.pitt.edu");*/
+        
+        svg.append("g")
+            .selectAll("path")
+            .data({{ geoLVL }})
+            .enter()
+            //.join("path")
+            .append("path")
+                .attr("d", path)
+                .attr("fill", function(d){
+            if (data.get(d.id)){return color(data.get(d.id))}
+            else {return "#d3d3d3"}
+        }
+                      )
+                //.attr('fill', d => d === null ? 'grey' : color(d))
+            .append("title")
+                .text(function(d){
+            if (data.get(d.id)){return `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name}
+${data.get(d.id)}`}
+            else {return `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name} 
+SUPPRESSED`}
+            
+        });
+          
+          /*svg2.append("g")
+            .selectAll("path")
+            .data({{ geoLVL }})
+            .enter()
+            //.join("path")
+            .append("path")
+                .attr("d", path)
+                .attr("fill", function(d){
+            if (data.get(d.id)){return color(data.get(d.id))}
+            else {return "#d3d3d3"}
+        }
+                      )
+                //.attr('fill', d => d === null ? 'grey' : color(d))
+            .append("title")
+                .text(d => `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name}
+${data.get(d.id)}%`);  */
+        
+        {{ bubbles }}
+        
+        svg.append("path")
+          .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+          .attr("fill", "none")
+          .attr("stroke", "white")
+          .attr("stroke-linejoin", "round")
+          .attr("d", path);
+        
+        
+            }
+        } 
+
+        </script>
+        
+        </div></center>
+        </form>
+        <hr>
+        <button class="btn btn-brand" onclick="saveSVG()">Download Map</button>
+        <script src="{% static 'assets/js/saveSvgAsPng.js' %}"></script>
+        <script>function saveSVG(){ saveSvgAsPng(document.getElementById("map"), "moira.png"); }</script>
+        <br><br>
+            
+        {{ text }}
+        <p>Data was suppressed for the following regions:</p>
+        <div class="container" id="results" style="background-color: white; height:400px; overflow-y: scroll">
+        <table class="table table-striped table-hover ">
+                  {{ suptable }}
+        </table>
+        </div>
+        <hr>
+        <h6>Query:</h6>
+        {{ query }}
+    </div>
+</section>
+
+
+{% endblock content %}

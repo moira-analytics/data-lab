@@ -1,0 +1,458 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Demographics{% endblock title %}
+{% block content %}
+{% load static %}
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div id="loading" class="modal">
+                <center>
+                <!-- Modal content -->
+                <div class="modal-dialog-centered">
+                    
+                    <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+                    <br><br>
+                    <h4 style="color: aliceblue">Please Wait</h4>
+                    <p style="color: aliceblue">Fetching data...</p>
+                    <br><br>
+                    </div>
+                    
+                    
+                </div>
+                </center>
+    </div>
+    <div class="container">
+    
+    {{ alerts }}
+        
+      <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row" style="height:100px">
+        <div class="col-md-4">
+        
+        </div>
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        {{ race_sex_form.title_2 }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-brand" type="submit">Create Plot</button>
+        
+            <button class="btn btn-brand" href="raceSex" type="reset"><a style="color:azure" href="raceSex">New Query</a></button>           
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+                   </div>
+                   <div class="collapse show" style="position: absolute; width:350px" id="collapse-1" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+                          <small>Year Range:</small>
+                          {{ race_sex_form.year1_2 }}
+                          <small>-</small>
+                          {{ race_sex_form.year2_2 }}
+                          <br><hr><p></p>
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion2">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-2" class="" aria-expanded="false">Geography</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:290px" id="collapse-2" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        {{ race_sex_form.geoLevel_2 }}
+                      <small>States:</small>
+                      {{ race_sex_form.abbreviatedStates_2 }}
+                      <hr>
+                      <small>Select Counties:</small><br>
+                      <a>Find Specific Counties:</a>
+                      <div class="container" id="countybox" style="background-color:rgba(245, 244, 245, 1);overflow-y: scroll; height:300px">
+                      <small>Alabama</small>
+                        {{ race_sex_form.ALselect_2 }}
+                        <small>Alaska</small>
+                        {{ race_sex_form.AKselect_2 }}
+                        <small>Arizona</small>
+                        {{ race_sex_form.AZselect_2 }}
+                        <small>Arkansas</small>
+                        {{ race_sex_form.ARselect_2 }}
+                        <small>California</small>
+                        {{ race_sex_form.CAselect_2 }}
+                        <small>Colorado</small>
+                        {{ race_sex_form.COselect_2 }}
+                        <small>Connecticut</small>
+                        {{ race_sex_form.CTselect_2 }}
+                        <small>Delaware</small>
+                        {{ race_sex_form.DEselect_2 }}
+                        <small>District of Columbia</small>
+                        {{ race_sex_form.DCselect_2 }}
+                        <small>Florida</small>
+                        {{ race_sex_form.FLselect_2 }}
+                        <small>Georgia</small>
+                        {{ race_sex_form.GAselect_2 }}
+                        <small>Hawaii</small>
+                        {{ race_sex_form.HIselect_2 }}
+                        <small>Idaho</small>
+                        {{ race_sex_form.IDselect_2 }}
+                        <small>Illinois</small>
+                        {{ race_sex_form.ILselect_2 }}
+                        <small>Indiana</small>
+                        {{ race_sex_form.INselect_2 }}
+                        <small>Iowa</small>
+                        {{ race_sex_form.IAselect_2 }}
+                        <small>Kansas</small>
+                        {{ race_sex_form.KSselect_2 }}
+                        <small>Kentucky</small>
+                        {{ race_sex_form.KYselect_2 }}
+                        <small>Louisiana</small>
+                        {{ race_sex_form.LAselect_2 }}
+                        <small>Maine</small>
+                        {{ race_sex_form.MEselect_2 }}
+                        <small>Maryland</small>
+                        {{ race_sex_form.MDselect_2 }}
+                        <small>Massachusetts</small>
+                        {{ race_sex_form.MAselect_2 }}
+                        <small>Michigan</small>
+                        {{ race_sex_form.MIselect_2 }}
+                        <small>Minnesota</small>
+                        {{ race_sex_form.MNselect_2 }}
+                        <small>Mississippi</small>
+                        {{ race_sex_form.MSselect_2 }}
+                        <small>Missouri</small>
+                        {{ race_sex_form.MOselect_2 }}
+                        <small>Montana</small>
+                        {{ race_sex_form.MTselect_2 }}
+                        <small>Nebraska</small>
+                        {{ race_sex_form.NEselect_2 }}
+                        <small>Nevada</small>
+                        {{ race_sex_form.NVselect_2 }}
+                        <small>New Hampshire</small>
+                        {{ race_sex_form.NHselect_2 }}
+                        <small>New Jersey</small>
+                        {{ race_sex_form.NJselect_2 }}
+                        <small>New Mexico</small>
+                        {{ race_sex_form.NMselect_2 }}
+                        <small>New York</small>
+                        {{ race_sex_form.NYselect_2 }}
+                        <small>North Carolina</small>
+                        {{ race_sex_form.NCselect_2 }}
+                        <small>North Dakota</small>
+                        {{ race_sex_form.NDselect_2 }}
+                        <small>Ohio</small>
+                        {{ race_sex_form.OHselect_2 }}
+                        <small>Oklahoma</small>
+                        {{ race_sex_form.OKselect_2 }}
+                        <small>Oregon</small>
+                        {{ race_sex_form.ORselect_2 }}
+                        <small>Pennsylvania</small>
+                        {{ race_sex_form.PAselect_2 }}
+                        <small>Rhode Island</small>
+                        {{ race_sex_form.RIselect_2 }}
+                        <small>South Carolina</small>
+                        {{ race_sex_form.SCselect_2 }}
+                        <small>South Dakota</small>
+                        {{ race_sex_form.SDselect_2 }}
+                        <small>Tennessee</small>
+                        {{ race_sex_form.TNselect_2 }}
+                        <small>Texas</small>
+                        {{ race_sex_form.TXselect_2 }}
+                        <small>Utah</small>
+                        {{ race_sex_form.UTselect_2 }}
+                        <small>Vermont</small>
+                        {{ race_sex_form.VTselect_2 }}
+                        <small>Virginia</small>
+                        {{ race_sex_form.VAselect_2 }}
+                        <small>Washington</small>
+                        {{ race_sex_form.WAselect_2 }}
+                        <small>West Virginia</small>
+                        {{ race_sex_form.WVselect_2 }}
+                        <small>Wisconsin</small>
+                        {{ race_sex_form.WIselect_2 }}
+                        <small>Wyoming</small>
+                        {{ race_sex_form.WYselect_2 }}    
+                      </div>
+                      <!-- make this appear only when County is selected-->
+                      
+
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion3">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-3" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        <p>Choose from ONE group:</p>
+                      <small>OCMAP 63 <b>(Available all time periods)</b></small>
+                      {{ race_sex_form.cod_2 }}
+                      <hr>
+                      <small>MOIRA 113 <b>(Available between 1979 - 2017)</b></small>
+                      {{ race_sex_form.cod113_2 }}
+                      <hr>
+                      <small>Custom Cause of Death:</small>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+
+        </div>
+
+    
+        <center>
+
+        
+        <br><br>
+        {{ text }}
+        
+        <div class="container" id="chart" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width:900px;height: 400px; background-color: white">
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <style> /* set the CSS */
+
+          .grid line {
+            stroke: lightgrey;
+            stroke-opacity: 0.9;
+            shape-rendering: crispEdges
+          }
+          .grid path {
+            stroke-width: 0;
+          }
+        </style>
+            <script>
+function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}
+                
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 70, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// Parse the date / time
+var parseDate = d3.timeParse("%Y");
+
+// Set the ranges
+var x = d3.scaleTime().range([0, width]);  
+var y = d3.scaleLinear().range([height-100, 0]);
+
+// Define the line
+var rate_line = d3.line()	
+    .x(function(d) { return x(d.Time_Period_Label); })
+    .y(function(d) { return y(d.Age_Adjusted_Rate); });       
+
+// Adds the svg canvas
+var svg = d3.select("#chart")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + (margin.top + 30) + ")");
+    
+function make_x_gridlines() {		
+    return d3.axisBottom(x)
+        .ticks(10)
+}
+
+// gridlines in y axis function
+function make_y_gridlines() {		
+    return d3.axisLeft(y)
+        .ticks(10)
+}
+                
+// Get the data         
+d3.csv('{% static 'temp_result.csv' %}', function(error, data){
+    data.forEach(function(d) {
+		d.Time_Period_Label = parseDate(d.Time_Period_Label);
+		d.Age_Adjusted_Rate = +d.Age_Adjusted_Rate;
+    });
+    
+    console.log(data)
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.Time_Period_Label; }));
+    y.domain([0, d3.max(data, function(d) { return d.Age_Adjusted_Rate; })]);
+    
+    // Nest the entries by symbol
+    var dataNest = d3.nest()
+        .key(function(d) {return d.RaceSex;})
+        .entries(data);
+
+    // set the colour scale
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    legendSpace = width/dataNest.length; // spacing for the legend
+    //legendSpots = 
+    // Loop through each symbol / key
+    
+    svg.append("rect")
+        .attr("width", "88%")
+        .attr("height", "55%")
+        .attr("transform","translate(0,-5)")
+        .attr("fill", "rgba(214, 214, 214, 0.2)");
+    
+      // add the X gridlines
+    svg.append("g")			
+      .attr("class", "grid")
+      .attr("height","100%")
+      .attr("stroke-width","0.5px")
+      .attr("transform", "translate(0,200)")
+      .call(make_x_gridlines()
+          .tickSize(-210,0,0)
+          .tickFormat("")
+      )
+
+      // add the Y gridlines
+    svg.append("g")			
+        .attr("class", "grid")
+        .attr("stroke-width","0.5px")
+        .call(make_y_gridlines()
+          .tickSize(-width)
+          .tickFormat("")
+    )
+      // text label for the y axis
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height/2.85))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Rate Per 1,000 (Age Adjusted)"); 
+    
+    dataNest.forEach(function(d,i) { 
+        
+        svg.append("path")
+            .attr("class", "line")
+            .attr("fill", "none")
+            .attr("stroke-width", "3px")
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .attr("d", rate_line(d.values));
+        
+        var down = 0;
+        
+        if (i > 3) {
+            down = 180;
+            i = i-4;
+        }
+        
+                // Add the Legend
+        svg.append("text")
+            .attr("x", (legendSpace) + down)  // space legend
+            .attr("y", height + (i*20) - 55)
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .text(d.key); 
+        
+        
+        // Add the Legend
+        svg.append("line")
+            .attr("x1", (legendSpace/2)+down)
+            .attr("x2", (legendSpace/2)+down+20)
+            .attr("y1", height + (i*20) - 60)
+            .attr("y2", height + (i*20) - 60)
+            .attr("stroke-width", "3px")    // style the legend
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); });
+            
+
+    });
+    
+    
+    
+    // Add the X Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,200)")
+      .call(d3.axisBottom(x));
+
+    // Add the Y Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y));
+    
+    svg.append("text")
+        .attr("x", 250)             
+        .attr("y", -20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "18px") 
+        .style("text-decoration", "bold")  
+        .text("{{ title }}");
+    
+    
+});
+       
+       
+       /*, function(error, data) {
+    console.log(data)
+    data.forEach(function (d) {
+        d.Time_Period_Label = +d.Time_Period_Label;
+        d['White Male'] = +d['White Male'];
+        d['White Female'] = +d['White Female'];
+        d['Black Male'] = +d['Black Male'];
+        d['Black Female'] = +d['Black Female'];
+        d['Asian or Pacific Islander Male'] = +d['Asian or Pacific Islander Male'];
+        d['Asian or Pacific Islander Female'] = +d['Asian or Pacific Islander Female'];
+        d['American Indian or Alaska Native Male'] = +d['American Indian or Alaska Native Male'];
+        d['American Indian or Alaska Native Female'] = +d['American Indian or Alaska Native Female'];
+    });
+
+    var chart = makeLineChart(data, 'Time_Period_Label', {
+        'White Male': {column: 'White Male'},
+        'White Female': {column: 'White Female'},
+        'Black Male': {column: 'Black Male'},
+        'Black Female': {column: 'Black Female'},
+        'Asian or Pacific Islander Male': {column: 'Asian or Pacific Islander Male'},
+        'Asian or Pacific Islander Female': {column: 'Asian or Pacific Islander Female'},
+        'American Indian or Alaska Native Male': {column: 'American Indian or Alaska Native Male'},
+        'American Indian or Alaska Native Female': {column: 'American Indian or Alaska Native Female'}
+    }, {xAxis: 'Years', yAxis: 'Age Adjusted Rate'});
+    chart.bind("#chart-line1");
+    chart.render();
+
+});*/
+                
+                
+                
+                
+            </script>
+        </div>
+        </center>
+        <hr>
+        
+    
+     </form> 
+        <button class="btn btn-brand" onclick="saveSVG()">Download Chart</button>
+        <script src="{% static 'assets/js/saveSvgAsPng.js' %}"></script>
+        <script>function saveSVG(){ saveSvgAsPng(document.querySelector("svg"), "moira.png");}</script>
+         <br><br>
+        <p>Data was suppressed for the following categories:</p>
+        <div class="container" id="results" style="background-color: white; height:400px; overflow-y: scroll">
+        <table class="table table-striped table-hover ">
+                  {{ suptable }}
+        </table>
+        </div>
+        <hr>
+        {{ query }}
+
+    </div>
+</section>
+
+
+{% endblock content %}

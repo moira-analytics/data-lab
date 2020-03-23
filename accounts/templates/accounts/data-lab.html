@@ -1,0 +1,1076 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Data Lab{% endblock title %}
+{% block content %}
+
+<section class="module" style="background: linear-gradient(180deg, rgba(9,86,121,1) 0%, rgba(48,44,94,0) 11%)">
+        <div class="container">
+        <h3 style="color:blueviolet">Using MOIRA Data Lab</h3>
+        <hr>
+        <div class="row">
+        <div class="col-md-6">
+        <h5>The Data</h5>
+        <p>MOIRA contains the underlying cause of death code using International Classification of Diseases (ICD) codes for all persons who died in the US between 1950 and 2017 (limited to deaths from malignant neoplasms for the 1950-1961 time period).</p>
+        <h5>Selection Criteria</h5>
+        <p>For general queries, you can group results by <b>Cause of Death, Time, Geography or Demographics</b> and download the tabular data in Excel-compatible CSV format.</p>
+        <h5>Visualizations</h5>
+        <p>Plot mortality data by Race and Sex over time or generate maps to compare different geographic regions for a given time period. For additional visualization examples, see <a href="docs">API Docs</a>.</p>
+        </div>
+        <div class="col-md-6" >
+            {% load static %}
+            <img src="{% static 'assets/images/moira (7).png' %}">
+        </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href='rates'><div class="icon-box-icon">
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="96" height="96"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="86" y1="13.4375" x2="86" y2="161.28225" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="83.3125" y1="77.9375" x2="83.3125" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="61.8125" y1="77.9375" x2="61.8125" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="107.5" y1="77.9375" x2="107.5" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="86" y1="13.4375" x2="86" y2="161.28225" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="83.3125" y1="77.9375" x2="83.3125" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="61.8125" y1="77.9375" x2="61.8125" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="107.5" y1="77.9375" x2="107.5" y2="104.8125" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="142.52143" y1="102.74874" x2="142.52143" y2="168.68901" gradientUnits="userSpaceOnUse" id="color-9"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient></defs><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none" stroke="none"></path><g id="original-icon" stroke="none" opacity="0" visibility="hidden"><path d="M137.38769,42.21256l-23.72525,-23.72525c-1.52113,-1.52113 -3.5475,-2.36231 -5.70288,-2.36231h-67.64706c-4.44512,0 -8.0625,3.61737 -8.0625,8.0625v107.5v5.375v10.75c0,4.44512 3.61738,8.0625 8.0625,8.0625h91.375c4.44512,0 8.0625,-3.61738 8.0625,-8.0625v-10.75v-5.375v-83.77475c0,-2.15269 -0.8385,-4.17906 -2.36231,-5.70019zM130.57488,43h-15.01237c-1.48081,0 -2.6875,-1.204 -2.6875,-2.6875v-15.01238zM131.6875,150.5h-91.375c-1.48081,0 -2.6875,-1.204 -2.6875,-2.6875v-3.18469c0.84387,0.30369 1.7415,0.49719 2.6875,0.49719h91.375c0.946,0 1.84363,-0.1935 2.6875,-0.4945v3.182c0,1.4835 -1.20669,2.6875 -2.6875,2.6875zM134.375,137.0625c0,1.4835 -1.20669,2.6875 -2.6875,2.6875h-91.375c-1.48081,0 -2.6875,-1.204 -2.6875,-2.6875v-5.375v-107.5c0,-1.4835 1.20669,-2.6875 2.6875,-2.6875h67.1875v18.8125c0,4.44512 3.61738,8.0625 8.0625,8.0625h18.8125v83.3125z" fill="url(#color-1)"></path><path d="M75.25,86v17.46875c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-6.71875h5.375v6.71875c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-22.84375c0,-1.4835 -1.204,-2.6875 -2.6875,-2.6875h-5.375c-4.45319,0 -8.0625,3.60931 -8.0625,8.0625zM80.625,91.375v-5.375c0,-1.4835 1.204,-2.6875 2.6875,-2.6875h2.6875v8.0625z" fill="url(#color-2)"></path><path d="M69.875,91.375v-8.0625c0,-2.96969 -2.40531,-5.375 -5.375,-5.375h-8.0625c-1.4835,0 -2.6875,1.204 -2.6875,2.6875v22.84375c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-6.71875h1.54531l3.67112,7.32075c0.22844,0.45419 0.69338,0.74175 1.20131,0.74175h2.9885c0.99975,0 1.65013,-1.0535 1.20131,-1.94575l-3.25725,-6.50106c1.98606,-0.78744 3.39969,-2.71975 3.39969,-4.99069zM59.125,91.375v-8.0625h4.03125c0.74175,0 1.34375,0.602 1.34375,1.34375v5.375c0,0.74175 -0.602,1.34375 -1.34375,1.34375z" fill="url(#color-3)"></path><path d="M98.02925,103.53594l-1.20937,-24.1875c-0.03762,-0.76863 0.57513,-1.41094 1.34375,-1.41094h2.67406c0.72025,0 1.3115,0.56706 1.34375,1.28731l0.61544,14.83769l3.15244,-5.79156c0.66919,-1.22819 2.43219,-1.22819 3.10137,0l3.15244,5.79156l0.61812,-14.83769c0.02956,-0.72025 0.6235,-1.28731 1.34375,-1.28731h2.67406c0.76863,0 1.38138,0.64231 1.34106,1.41094l-1.20938,24.1875c-0.03762,0.71487 -0.62619,1.27656 -1.34375,1.27656h-3.26262c-0.51062,0 -0.97556,-0.29025 -1.204,-0.74712l-3.66038,-7.37988l-3.66038,7.37988c-0.22844,0.45688 -0.69337,0.74712 -1.204,0.74712h-3.26262c-0.71756,0 -1.30612,-0.56169 -1.34375,-1.27656z" fill="url(#color-4)"></path></g><g id="subtracted-icon" stroke="none"><path d="M139.75,47.91275v46.15014h-5.29619c-0.02629,0 -0.05256,0.00009 -0.07881,0.00028v-45.68817h-18.8125c-4.44512,0 -8.0625,-3.61738 -8.0625,-8.0625v-18.8125h-67.1875c-1.48081,0 -2.6875,1.204 -2.6875,2.6875v112.875c0,1.4835 1.20669,2.6875 2.6875,2.6875h67.35387c0.04279,1.89024 0.6005,3.74194 1.64477,5.375h-68.99864c-0.946,0 -1.84363,-0.1935 -2.6875,-0.49719v3.18469c0,1.4835 1.20669,2.6875 2.6875,2.6875h73.42466l4.55218,5.375h-77.97685c-4.44512,0 -8.0625,-3.61738 -8.0625,-8.0625v-123.625c0,-4.44513 3.61738,-8.0625 8.0625,-8.0625h67.64706c2.15537,0 4.18175,0.84119 5.70288,2.36231l23.72525,23.72525c1.52381,1.52112 2.36231,3.5475 2.36231,5.70019zM112.875,25.30013v15.01238c0,1.4835 1.20669,2.6875 2.6875,2.6875h15.01237z" fill="url(#color-5)"></path><path d="M75.25,86v17.46875c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-6.71875h5.375v6.71875c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-22.84375c0,-1.4835 -1.204,-2.6875 -2.6875,-2.6875h-5.375c-4.45319,0 -8.0625,3.60931 -8.0625,8.0625zM80.625,91.375v-5.375c0,-1.4835 1.204,-2.6875 2.6875,-2.6875h2.6875v8.0625z" fill="url(#color-6)"></path><path d="M69.875,91.375v-8.0625c0,-2.96969 -2.40531,-5.375 -5.375,-5.375h-8.0625c-1.4835,0 -2.6875,1.204 -2.6875,2.6875v22.84375c0,0.74175 0.602,1.34375 1.34375,1.34375h2.6875c0.74175,0 1.34375,-0.602 1.34375,-1.34375v-6.71875h1.54531l3.67112,7.32075c0.22844,0.45419 0.69338,0.74175 1.20131,0.74175h2.9885c0.99975,0 1.65013,-1.0535 1.20131,-1.94575l-3.25725,-6.50106c1.98606,-0.78744 3.39969,-2.71975 3.39969,-4.99069zM59.125,91.375v-8.0625h4.03125c0.74175,0 1.34375,0.602 1.34375,1.34375v5.375c0,0.74175 -0.602,1.34375 -1.34375,1.34375z" fill="url(#color-7)"></path><path d="M99.373,104.8125h3.26263c0.51063,0 0.97556,-0.29025 1.204,-0.74712l3.66038,-7.37988l3.66038,7.37988c0.22844,0.45688 0.69338,0.74712 1.204,0.74712h3.26263c0.71756,0 1.30612,-0.56169 1.34375,-1.27656l1.20938,-24.1875c0.04031,-0.76863 -0.57244,-1.41094 -1.34106,-1.41094h-2.67406c-0.72025,0 -1.31419,0.56706 -1.34375,1.28731l-0.61812,14.83769l-3.15244,-5.79156c-0.66919,-1.22819 -2.43219,-1.22819 -3.10137,0l-3.15244,5.79156l-0.61544,-14.83769c-0.03225,-0.72025 -0.6235,-1.28731 -1.34375,-1.28731h-2.67406c-0.76863,0 -1.38138,0.64231 -1.34375,1.41094l1.20937,24.1875c0.03763,0.71487 0.62619,1.27656 1.34375,1.27656z" fill="url(#color-8)"></path></g><g stroke="none"><g id="Layer_1" fill="url(#color-9)"><path d="M142.52143,172c-2.24479,0 -4.36591,-0.98394 -5.82032,-2.69912l-22.43711,-26.49655c-1.30117,-1.53506 -1.58345,-3.62123 -0.74199,-5.44663c0.84415,-1.83347 2.62116,-2.97065 4.63475,-2.97065h10.92284v-29.57204c0,-2.97065 2.40878,-5.37673 5.37673,-5.37673h16.11945c2.96258,0 5.38749,2.42491 5.38749,5.38749v29.56129h10.92284c2.01359,0 3.7906,1.13718 4.63743,2.97065c0.83877,1.8254 0.55649,3.91426 -0.7393,5.44932l-22.4398,26.49655c-1.4571,1.71249 -3.57822,2.69643 -5.823,2.69643zM118.7482,139.76379l22.03117,26.05834c0.59413,0.69898 1.3415,0.80382 1.734,0.80382c0.3925,0 1.14256,-0.10485 1.734,-0.80382l22.03655,-26.05834h-15.69738v-34.94877h-16.1302l-0.01075,34.94877zM166.96675,139.76379h0.02688z"></path></g><g id="Layer_1" fill="#000000" opacity="0"><path d="M176.41923,135.11426c-1.78239,-3.78522 -5.42781,-6.10259 -9.5437,-6.10259h-5.53804v-24.1953c0,-5.93054 -4.82293,-10.75347 -10.75347,-10.75347h-16.1302c-5.93054,0 -10.75347,4.82293 -10.75347,10.75347v24.1953h-5.53804c-4.11589,0 -7.76132,2.31737 -9.51682,6.04345c-1.72862,3.79329 -1.14256,8.0651 1.50549,11.21049l22.45862,26.51805c2.50825,2.92494 6.11335,4.59173 9.90932,4.59173c3.79597,0 7.40107,-1.6641 9.8905,-4.56485l22.46937,-26.5315c2.65611,-3.15614 3.24217,-7.43065 1.54043,-11.16479z"></path></g></g><path d="M113.0438,172v-72.56172h58.9562v72.56172z" id="overlay-drag" fill="#ff0000" stroke="none" opacity="0"></path></g></svg>
+                   </div></a>
+                   <div class="icon-box-title">
+                       <h6>Data Query</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Choose from all selection criteria to generate mortality rates as tabular data. Downloads are available in CSV or XLSX format.</p>
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href="raceSex"><div class="icon-box-icon">
+                       
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="96" height="96"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="29.5625" y1="28.21875" x2="29.5625" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="67.1875" y1="28.21875" x2="67.1875" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="104.8125" y1="28.21875" x2="104.8125" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="142.4375" y1="28.21875" x2="142.4375" y2="143.85113" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="29.5625" y1="114.66756" x2="29.5625" y2="138.87119" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="67.1875" y1="88.23869" x2="67.1875" y2="137.52744" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="104.8125" y1="55.98869" x2="104.8125" y2="137.51669" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="142.4375" y1="103.46875" x2="142.4375" y2="138.86581" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient></defs><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g id="original-icon"><path d="M37.625,88.6875h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v26.875c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-26.875v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM21.5,94.0625h16.125v5.375v0h-16.125zM37.63038,137.0625h-16.13037v-26.875v-5.375h16.125v5.375h0.00269z" fill="url(#color-1)"></path><path d="M75.25,61.8125h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v53.75c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-53.75v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM59.125,67.1875h16.125v5.375v0h-16.125zM75.25538,137.0625h-16.13037v-53.75v-5.375h16.125v5.375v0z" fill="url(#color-2)"></path><path d="M112.875,29.5625h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v86c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-86v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM96.75,34.9375h16.125v5.375v0h-16.125zM112.88038,137.0625h-16.13037v-86v-5.375h16.125v5.375v0z" fill="url(#color-3)"></path><path d="M150.5,77.9375h-16.125c-2.96431,0 -5.375,2.41069 -5.375,5.375v10.75v5.375v37.625c0,2.96431 2.41069,5.375 5.375,5.375h16.125c2.96431,0 5.375,-2.41069 5.375,-5.375v-37.625v-5.375v-10.75c0,-2.96431 -2.41069,-5.375 -5.375,-5.375zM134.375,83.3125h16.125v5.375v0h-16.125zM150.50538,137.0625h-16.13038v-37.625v-5.375h16.125v5.375h0.00269z" fill="url(#color-4)"></path><path d="M26.875,115.5625h5.375v21.5h-5.375z" fill="url(#color-5)"></path><path d="M64.5,88.6875h5.375v48.375h-5.375z" fill="url(#color-6)"></path><path d="M102.125,56.4375h5.375v80.625h-5.375z" fill="url(#color-7)"></path><path d="M139.75,104.8125h5.375v32.25h-5.375z" fill="url(#color-8)"></path></g><path d="" fill="none"></path></g></g></svg>
+                       </div></a>
+                   <div class="icon-box-title">
+                       <h6>Demographics</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Plot mortality rates by Race and Sex over time to analyze health disparities among available demographic groups.</p>
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="icon-box text-center">
+                   <a href="geo1"><div class="icon-box-icon">
+                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="100" height="100"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><defs><linearGradient x1="72.5625" y1="27.21094" x2="72.5625" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-1"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.3125" y1="46.2895" x2="126.3125" y2="67.03969" gradientUnits="userSpaceOnUse" id="color-2"><stop offset="0" stop-color="#6dc7ff"></stop><stop offset="1" stop-color="#e6abff"></stop></linearGradient><linearGradient x1="126.3125" y1="32.25" x2="126.3125" y2="150.00013" gradientUnits="userSpaceOnUse" id="color-3"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.3125" y1="27.21094" x2="126.3125" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-4"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.3125" y1="27.21094" x2="126.3125" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-5"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.3125" y1="27.21094" x2="126.3125" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-6"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="153.1875" y1="27.21094" x2="153.1875" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-7"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="99.4375" y1="27.21094" x2="99.4375" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-8"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.29906" y1="27.21094" x2="126.29906" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-9"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="45.6875" y1="27.21094" x2="45.6875" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-10"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="45.6875" y1="27.21094" x2="45.6875" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-11"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="126.3125" y1="50.55456" x2="126.3125" y2="141.38938" gradientUnits="userSpaceOnUse" id="color-12"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="72.5625" y1="27.21094" x2="72.5625" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-13"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="99.4375" y1="27.21094" x2="99.4375" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-14"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient><linearGradient x1="86" y1="27.21094" x2="86" y2="144.96106" gradientUnits="userSpaceOnUse" id="color-15"><stop offset="0" stop-color="#1a6dff"></stop><stop offset="1" stop-color="#c822ff"></stop></linearGradient></defs><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><path d="" fill="none"></path><path d="M86,172c-47.49649,0 -86,-38.50351 -86,-86v0c0,-47.49649 38.50351,-86 86,-86h0c47.49649,0 86,38.50351 86,86v0c0,47.49649 -38.50351,86 -86,86z" fill="none"></path><path d="M86,168.56c-45.59663,0 -82.56,-36.96337 -82.56,-82.56v0c0,-45.59663 36.96337,-82.56 82.56,-82.56h0c45.59663,0 82.56,36.96337 82.56,82.56v0c0,45.59663 -36.96337,82.56 -82.56,82.56z" fill="none"></path><path d="M0,172v-172h172v172z" fill="none"></path><path d="M3.44,168.56v-165.12h165.12v165.12z" fill="none"></path><path d="M86,172c-47.49649,0 -86,-38.50351 -86,-86v0c0,-47.49649 38.50351,-86 86,-86h0c47.49649,0 86,38.50351 86,86v0c0,47.49649 -38.50351,86 -86,86z" fill="none"></path><path d="M86,168.56c-45.59663,0 -82.56,-36.96337 -82.56,-82.56v0c0,-45.59663 36.96337,-82.56 82.56,-82.56h0c45.59663,0 82.56,36.96337 82.56,82.56v0c0,45.59663 -36.96337,82.56 -82.56,82.56z" fill="none"></path><path d="" fill="none"></path><path d="M0,172v-172h172v172z" fill="none"></path><path d="M3.44,168.56v-165.12h165.12v165.12z" fill="none"></path><path d="" fill="none"></path><g id="original-icon"><path d="M69.875,29.5625h5.375v24.1875h-5.375z" fill="url(#color-1)"></path><path d="M123.88031,46.96944l-5.2245,8.10819c-0.54019,0.8385 -0.54019,1.88394 0,2.72244l5.2245,8.10819c1.10187,1.70925 3.7625,1.70925 4.86437,0l5.2245,-8.10819c0.54019,-0.8385 0.54019,-1.88394 0,-2.72244l-5.2245,-8.10819c-1.10188,-1.70925 -3.7625,-1.70925 -4.86437,0z" fill="url(#color-2)"></path><path d="M123.625,21.5h5.375v8.0625h-5.375z" fill="url(#color-3)"></path><path d="M126.3125,88.6875c-17.78319,0 -32.25,-14.46681 -32.25,-32.25c0,-17.78319 14.46681,-32.25 32.25,-32.25c17.78319,0 32.25,14.46681 32.25,32.25c0,17.78319 -14.46681,32.25 -32.25,32.25zM126.3125,29.5625c-14.81888,0 -26.875,12.05613 -26.875,26.875c0,14.81887 12.05612,26.875 26.875,26.875c14.81888,0 26.875,-12.05613 26.875,-26.875c0,-14.81887 -12.05612,-26.875 -26.875,-26.875z" fill="url(#color-4)"></path><path d="M126.3125,77.9375c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375z" fill="url(#color-5)"></path><path d="M126.3125,24.1875c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375z" fill="url(#color-6)"></path><path d="M153.1875,51.0625c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375z" fill="url(#color-7)"></path><path d="M99.4375,51.0625c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375z" fill="url(#color-8)"></path><path d="M126.35281,24.1875c-4.46931,0 -8.10281,-3.61737 -8.10281,-8.0625c0,-4.44512 3.6335,-8.0625 8.10281,-8.0625c4.46931,0 7.99531,3.61738 7.99531,8.0625c0,4.44513 -3.526,8.0625 -7.99531,8.0625zM126.3125,13.4375c-1.48081,0 -2.6875,1.20669 -2.6875,2.6875c0,1.48081 1.20669,2.6875 2.6875,2.6875c1.48081,0 2.6875,-1.20669 2.6875,-2.6875c0,-1.48081 -1.20669,-2.6875 -2.6875,-2.6875z" fill="url(#color-9)"></path><path d="M43,120.9375h5.375v21.83594h-5.375z" fill="url(#color-10)"></path><path d="M43,43h5.375v67.1875h-5.375z" fill="url(#color-11)"></path><path d="M123.625,102.125h5.375v27.21094h-5.375z" fill="url(#color-12)"></path><path d="M69.875,91.375h5.375v37.625h-5.375z" fill="url(#color-13)"></path><path d="M96.75,118.25h5.375v24.52344h-5.375z" fill="url(#color-14)"></path><path d="M99.4805,145.12769c-2.70094,0 -5.42337,-0.80088 -7.74269,-2.41606l-17.58431,-10.46781c-1.08038,-0.74444 -2.32738,-0.74444 -3.25456,-0.10213l-17.65687,10.664c-4.45588,3.11212 -10.64519,3.11481 -15.25425,-0.09406l-18.2105,-10.99187c-2.31125,-1.60444 -3.65231,-4.15488 -3.65231,-6.751v-92.71875c0,-1.97531 1.03469,-3.8485 2.77887,-4.76225c1.79256,-0.93525 3.94794,-0.7955 5.61956,0.37356l19.53006,11.83037c1.06694,0.73638 2.31394,0.74175 3.24112,0.09406l17.85038,-10.57531c4.43975,-3.10138 10.62906,-3.10406 15.23812,0.10481l17.35319,10.33344c0.7955,0.54556 1.52112,0.56706 2.02906,0.50525l0.65037,5.33469c-2.021,0.2365 -4.00437,-0.22575 -5.59269,-1.33031l-17.35319,-10.36031c-2.92669,-2.02638 -6.6435,-2.03175 -9.417,-0.10213l-17.85037,10.60219c-2.59344,1.81675 -6.30488,1.81944 -9.073,-0.10481l-19.6295,-11.94325v92.71875c0,0.85462 0.473,1.73613 1.20131,2.24406l18.20781,10.99188c2.91325,2.021 6.63813,2.02637 9.40625,0.09406l17.65688,-10.664c2.61494,-1.82481 6.32637,-1.8275 9.08644,0.09406l17.587,10.4705c2.92669,2.02906 6.64888,2.03444 9.41969,0.10213l17.71869,-10.66669c2.61225,-1.82212 6.32637,-1.82481 9.08644,0.09675l19.6295,12.0185v-65.84375l5.375,-5.375v71.21875c0,1.97531 -1.08306,3.76788 -2.82994,4.67894c-1.79794,0.93794 -3.95063,0.79281 -5.62225,-0.37087l-6.05494,-3.73562l-13.42137,-8.08669c-1.06694,-0.73369 -2.31125,-0.74175 -3.24113,-0.09675l-17.71869,10.66669c-2.20912,1.54531 -4.84556,2.322 -7.50619,2.322z" fill="url(#color-15)"></path></g></g></g></svg>
+                       
+                       </div></a>
+                   <div class="icon-box-title">
+                       <h6>GeoAnalytics</h6>
+                   </div>
+                   <div class="icon-box-content">
+                       <p>Compare US mortality rates at the State and County level for a given time period. Use Clustering Analysis to locate hotspots.</p>
+                   </div>
+                </div>
+            </div>
+        </div>    
+        
+        <hr>
+        
+        <div class="row" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.1558998599439776) 100%)">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link nav-scale active" data-toggle="tab" href="#tab-1-1">
+                            <h6>Cause of Death</h6>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link nav-scale" data-toggle="tab" href="#tab-1-2">
+                            <h6>Time</h6>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link nav-scale" data-toggle="tab" href="#tab-1-3">
+                            <h6>Geography</h6>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link nav-scale" data-toggle="tab" href="#tab-1-4">
+                            <h6>Demographics</h6>
+                        </a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-1-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <p><b>Standard 63 OCMAP categories</b> are available for cause of death grouping. Additionally, the <b>113 MOIRA specific categories</b> are available for datasets that employ only ICD-9 and/or ICD-10 codes.</p>
+                        <strong>Custom Cause of Death</strong>
+                        <p>Custom ICD categories can be selected by providing individual ICD codes. The ICD code revision is required to correspond to the selected time period.</p>
+                        </div>
+                        
+                        
+                        <div class="col-md-6">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link nav-scale active" data-toggle="tab" href="#ocmap">
+                                        <h7>OCMAP</h7>
+                                    </a></li>
+                                <li class="nav-item"><a class="nav-link nav-scale" data-toggle="tab" href="#moira113">
+                                        <h7>MOIRA</h7>
+                        </a></li>
+                            </ul>
+                            <div class="tab-content">
+                            <div class="tab-pane active" id="ocmap">
+                                <div class="container" style="background-color: white; height:270px; overflow-y: scroll">
+                            <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th class="col-md-1" style="width:70px">Code</th>
+                      <th class="col-md-4" style="width:300px">OCMAP Standard CoD Category</th>
+                      <th class="col-md-7" style="width:100px">ICD-10</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                              <tr>
+                      <td>1</td>
+                      <td>&nbsp;All Causes of Death</td>
+                      <td>A00 - R99, U01 - Y89</td>
+                    </tr>
+                              <tr>
+                      <td>2</td>
+                      <td>-&nbsp;Tuberculosis</td>
+                      <td>A15 - A19</td>
+                    </tr>
+                              <tr>
+                      <td>3</td>
+                      <td>-&nbsp;All Malignant Neoplasms</td>
+                      <td>C00 - C97</td>
+                    </tr>
+                              <tr>
+                      <td>4</td>
+                      <td>--&nbsp;Cancer of Buccal Cavity & Pharynx</td>
+                      <td>C00 - C14</td>
+                    </tr>
+                              <tr>
+                      <td>5</td>
+                      <td>--&nbsp;Cancer of Digestive Organs & Peritoneum</td>
+                      <td>C15 - C26, C48</td>
+                    </tr>
+                              <tr>
+                      <td>6</td>
+                      <td>--&nbsp;Cancer of Esophagus</td>
+                      <td>C15</td>
+                    </tr>
+                              <tr>
+                      <td>7</td>
+                      <td>--&nbsp;Cancer of Stomach</td>
+                      <td>C16</td>
+                    </tr>
+                              <tr>
+                      <td>8</td>
+                      <td>--&nbsp;Cancer of Large Intestine</td>
+                      <td>C18</td>
+                    </tr>
+                              <tr>
+                      <td>9</td>
+                      <td>--&nbsp;Cancer of Rectum</td>
+                      <td>C20 - C21</td>
+                    </tr>
+                              <tr>
+                      <td>10</td>
+                      <td>--&nbsp;Cancer of Biliary Passages & Liver</td>
+                      <td>C22, C24</td>
+                    </tr>
+                              <tr>
+                      <td>11</td>
+                      <td>--&nbsp;Cancer of Pancreas</td>
+                      <td>C25</td>
+                    </tr>
+                              <tr>
+                      <td>12</td>
+                      <td>--&nbsp;Cancer of All Other Digestive Organs</td>
+                      <td>C17, C19, C23, C26, C48</td>
+                    </tr>
+                              <tr>
+                      <td>13</td>
+                      <td>-&nbsp;Cancer of Respiratory System</td>
+                      <td>C30 - C39</td>
+                    </tr>
+                              <tr>
+                      <td>14</td>
+                      <td>--&nbsp;Cancer of Larynx</td>
+                      <td>C32</td>
+                    </tr>
+                              <tr>
+                      <td>15</td>
+                      <td>--&nbsp;Cancer of Bronchus, Trachea, Lung</td>
+                      <td>C33 - C34</td>
+                    </tr>
+                              <tr>
+                      <td>16</td>
+                      <td>--&nbsp;Cancer of All Other Respiratory</td>
+                      <td>C30 - C31, C37 - C39</td>
+                    </tr>
+                              <tr>
+                      <td>17</td>
+                      <td>-&nbsp;Cancer of Breast</td>
+                      <td>C50</td>
+                    </tr>
+                              <tr>
+                      <td>18</td>
+                      <td>-&nbsp;All Uterine Cancers (Females only)</td>
+                      <td>C53 - C55</td>
+                    </tr>
+                              <tr>
+                      <td>19</td>
+                      <td>-&nbsp;Cancer of Cervix Uteri (Females only)</td>
+                      <td>C53</td>
+                    </tr>
+                              <tr>
+                      <td>20</td>
+                      <td>-&nbsp;Cancer of Other Female Genital Organs</td>
+                      <td>C51 - C52, C56 - C58</td>
+                    </tr>
+                              <tr>
+                      <td>21</td>
+                      <td>-&nbsp;Cancer of Prostate (Males only)</td>
+                      <td>C61</td>
+                    </tr>
+                              <tr>
+                      <td>22</td>
+                      <td>-&nbsp;Cancer of Testes and Other Male Genital Organs</td>
+                      <td>C60, C62 - C63</td>
+                    </tr>
+                              <tr>
+                      <td>23</td>
+                      <td>-&nbsp;Cancer of Kidney</td>
+                      <td>C64 - C65</td>
+                    </tr>
+                              <tr>
+                      <td>24</td>
+                      <td>-&nbsp;Cancer of Bladder and Other Urinary Organs</td>
+                      <td>C66 - C68</td>
+                    </tr>
+                              <tr>
+                      <td>25</td>
+                      <td>-&nbsp;Malignant Melanoma of Skin</td>
+                      <td>C43</td>
+                    </tr>
+                              <tr>
+                      <td>26</td>
+                      <td>-&nbsp;Cancer of Eye</td>
+                      <td>C69</td>
+                    </tr>
+                              <tr>
+                      <td>27</td>
+                      <td>-&nbsp;Cancer of Central Nervous System</td>
+                      <td>C70 - C72</td>
+                    </tr>
+                              <tr>
+                      <td>28</td>
+                      <td>-&nbsp;Cancer of Thyroid & Other Endocrine Glands</td>
+                      <td>C73 - C75</td>
+                    </tr>
+                              <tr>
+                      <td>29</td>
+                      <td>-&nbsp;Cancer of Bone</td>
+                      <td>C40 - C41</td>
+                    </tr>
+                              <tr>
+                      <td>30</td>
+                      <td>-&nbsp;Cancer of All Lymphatic, Haematopoietic Tissue</td>
+                      <td>C81 - C96</td>
+                    </tr>
+                              <tr>
+                      <td>31</td>
+                      <td>--&nbsp;Hodgkins Disease</td>
+                      <td>C81</td>
+                    </tr>
+                              <tr>
+                      <td>32</td>
+                      <td>--&nbsp;Non-Hodgkins Lymphoma</td>
+                      <td>C82, C83.0 - C83.8, C84, C85.1 - C85.9</td>
+                    </tr>
+                              <tr>
+                      <td>33</td>
+                      <td>--&nbsp;Leukemia & Aleukemia</td>
+                      <td>C91 - C95</td>
+                    </tr>
+                              <tr>
+                      <td>34</td>
+                      <td>--&nbsp;Cancer of All Other Lymphopoietic Tissue</td>
+                      <td>C88, C90, C96</td>
+                    </tr>
+                              <tr>
+                      <td>35</td>
+                      <td>--&nbsp;All Other Malignant Neoplasms</td>
+                      <td>C44 - C47, C49, C76 - C79, C80, C97</td>
+                    </tr>
+                              <tr>
+                      <td>36</td>
+                      <td>-&nbsp;Benign Neoplasms</td>
+                      <td>D10 - D36</td>
+                    </tr>
+                              <tr>
+                      <td>37</td>
+                      <td>-&nbsp;Diabetes Mellitus</td>
+                      <td>E10 - E14</td>
+                    </tr>
+                              <tr>
+                      <td>38</td>
+                      <td>-&nbsp;Cerebrovascular Disease</td>
+                      <td>I60 - I69</td>
+                    </tr>
+                              <tr>
+                      <td>39</td>
+                      <td>-&nbsp;All Heart Disease</td>
+                      <td>I00 - I02, I05 - I09, I11, I13 - I14, I20 - I28, I30 - I52</td>
+                    </tr>
+                              <tr>
+                      <td>40</td>
+                      <td>--&nbsp;Rheumatic Heart Disease</td>
+                      <td>I00 - I02, I05 - I09</td>
+                    </tr>
+                              <tr>
+                      <td>41</td>
+                      <td>--&nbsp;Ischemic Heart Disease</td>
+                      <td>I20 - I25</td>
+                    </tr>
+                              <tr>
+                      <td>42</td>
+                      <td>--&nbsp;Chronic Endocard. Dis.; Other Myocard. Insuff.</td>
+                      <td>I33 - I41</td>
+                    </tr>
+                              <tr>
+                      <td>43</td>
+                      <td>--&nbsp;Hypertension with Heart Disease</td>
+                      <td>I11, I13</td>
+                    </tr>
+                              <tr>
+                      <td>44</td>
+                      <td>--&nbsp;All Other Heart Disease</td>
+                      <td>I26 - I28, I30 - I32, I42 - I43, I44 - I52</td>
+                    </tr>
+                              <tr>
+                      <td>45</td>
+                      <td>-&nbsp;Hypertension w/o Heart Disease</td>
+                      <td>I10, I12, I15</td>
+                    </tr>
+                              <tr>
+                      <td>46</td>
+                      <td>-&nbsp;Non-malignant Respiratory Disease</td>
+                      <td>J00 - J99</td>
+                    </tr>
+                              <tr>
+                      <td>47</td>
+                      <td>--&nbsp;Influenza & Pneumonia</td>
+                      <td>J10 - J18</td>
+                    </tr>
+                              <tr>
+                      <td>48</td>
+                      <td>--&nbsp;Bronchitis, Emphysema, Asthma</td>
+                      <td>J40 - J46</td>
+                    </tr>
+                              <tr>
+                      <td>49</td>
+                      <td>--&nbsp;Bronchitis</td>
+                      <td>J40 - J42, J44</td>
+                    </tr>
+                              <tr>
+                      <td>50</td>
+                      <td>--&nbsp;Emphysema</td>
+                      <td>J43</td>
+                    </tr>
+                              <tr>
+                      <td>51</td>
+                      <td>--&nbsp;Asthma</td>
+                      <td>J45 - J46</td>
+                    </tr>
+                              <tr>
+                      <td>52</td>
+                      <td>--&nbsp;Other Non-malignant Respiratory Disease</td>
+                      <td>J00 - J06, J20 - J22, J30 - J39, J47, J60 - J70, J80 - J86, J90 - J99</td>
+                    </tr>
+                              <tr>
+                      <td>53</td>
+                      <td>-&nbsp;Ulcer of Stomach & Duodenum</td>
+                      <td>K25 - K27</td>
+                    </tr>
+                              <tr>
+                      <td>54</td>
+                      <td>-&nbsp;Cirrhosis of Liver</td>
+                      <td>K70, K74</td>
+                    </tr>
+                              <tr>
+                      <td>55</td>
+                      <td>-&nbsp;Nephritis & Nephrosis</td>
+                      <td>N00 - N29</td>
+                    </tr>
+                              <tr>
+                      <td>56</td>
+                      <td>-&nbsp;All External Causes of Death</td>
+                      <td>V01 - Y89</td>
+                    </tr>
+                              <tr>
+                      <td>57</td>
+                      <td>--&nbsp;Accidents</td>
+                      <td>V01 - X59</td>
+                    </tr>
+                              <tr>
+                      <td>58</td>
+                      <td>---&nbsp;Motor Vehicle Accidents</td>
+                      <td>V01 - V99</td>
+                    </tr>
+                              <tr>
+                      <td>59</td>
+                      <td>---&nbsp;All Other Accidents</td>
+                      <td>W00 - X59</td>
+                    </tr>
+                              <tr>
+                      <td>60</td>
+                      <td>--&nbsp;Suicides</td>
+                      <td>X60 - X84</td>
+                    </tr>
+                              <tr>
+                      <td>61</td>
+                      <td>--&nbsp;Homicides & Other External Causes</td>
+                      <td>X85 - Y36, Y40 - Y89</td>
+                    </tr>
+                              <tr>
+                      <td>62</td>
+                      <td>-&nbsp;All Other Causes of Death</td>
+                      <td>A00 - A09, A20 - B19, B25 - B99, D00 - D09, D37 - D89, E00 - E07, E15 - H99, I70 - I99, K00 - K23, K28 - K67, K71 - K73, K75 - K93, L00 - M99, N30 - R99, U01 - U99</td>
+                    </tr>
+                              <tr>
+                      <td>63</td>
+                      <td>-&nbsp;AIDS</td>
+                      <td>B20 - B24</td>
+                    </tr>
+                            </tbody>
+                </table>
+                        </div>
+                            </div>
+                            <div class="tab-pane" id ="moira113">
+                                <div class="container" style="background-color: white; height:270px; overflow-y: scroll">
+            <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th class="col-1" style="width:70px">Code</th>
+              <th class="col-1" style="width:300px">MOIRA CoD Category</th>
+              <th class="col-1" style="width:100px">ICD-10</th>
+            </tr>
+          </thead>
+          <tbody>
+                    <tr>
+            <td>1</td>
+            <td>&nbsp;All causes of death</td>
+            <td>A00-Z99</td>
+          </tr>
+                    <tr>
+            <td>2</td>
+            <td>-&nbsp;Infectious and parasitic diseases</td>
+            <td>A00-B99</td>
+          </tr>
+                    <tr>
+            <td>3</td>
+            <td>--&nbsp;Tuberculosis</td>
+            <td>A16-A19</td>
+          </tr>
+                    <tr>
+            <td>4</td>
+            <td>--&nbsp;Septicemia</td>
+            <td>A40-A41</td>
+          </tr>
+                    <tr>
+            <td>5</td>
+            <td>--&nbsp;Viral disease</td>
+            <td>A80-B34</td>
+          </tr>
+                    <tr>
+            <td>6</td>
+            <td>---&nbsp;Viral hepatitis</td>
+            <td>B15-B19</td>
+          </tr>
+                    <tr>
+            <td>7</td>
+            <td>---&nbsp;Human immunodeficiency virus (HIV) disease</td>
+            <td>B20-B24</td>
+          </tr>
+                    <tr>
+            <td>8</td>
+            <td>-&nbsp;Cancer</td>
+            <td>C00-C97</td>
+          </tr>
+                    <tr>
+            <td>9</td>
+            <td>--&nbsp;Cancer of oral cavity and pharynx</td>
+            <td>C00-C14.8</td>
+          </tr>
+                    <tr>
+            <td>10</td>
+            <td>--&nbsp;Cancer of digestive organs</td>
+            <td>C15-C26, C48</td>
+          </tr>
+                    <tr>
+            <td>11</td>
+            <td>---&nbsp;Cancer of esophagus</td>
+            <td>C15</td>
+          </tr>
+                    <tr>
+            <td>12</td>
+            <td>---&nbsp;Cancer of stomach</td>
+            <td>C16</td>
+          </tr>
+                    <tr>
+            <td>13</td>
+            <td>---&nbsp;Cancer of other and ill-defined digestive</td>
+            <td>C17, C21, C23, C24, C26</td>
+          </tr>
+                    <tr>
+            <td>14</td>
+            <td>---&nbsp;Cancer of colon and rectum</td>
+            <td>C18-C20, C26.0</td>
+          </tr>
+                    <tr>
+            <td>15</td>
+            <td>---&nbsp;Cancer of liver and intrahepatic bile ducts</td>
+            <td>C22</td>
+          </tr>
+                    <tr>
+            <td>16</td>
+            <td>---&nbsp;Cancer of pancreas</td>
+            <td>C25</td>
+          </tr>
+                    <tr>
+            <td>17</td>
+            <td>--&nbsp;Cancer of the respiratory system</td>
+            <td>C30-C39</td>
+          </tr>
+                    <tr>
+            <td>18</td>
+            <td>---&nbsp;Cancer of larynx</td>
+            <td>C32</td>
+          </tr>
+                    <tr>
+            <td>19</td>
+            <td>---&nbsp;Cancer of lung and bronchus</td>
+            <td>C34</td>
+          </tr>
+                    <tr>
+            <td>20</td>
+            <td>--&nbsp;Cancer, melanoma of skin</td>
+            <td>C43</td>
+          </tr>
+                    <tr>
+            <td>21</td>
+            <td>--&nbsp;Cancer of breast</td>
+            <td>C50</td>
+          </tr>
+                    <tr>
+            <td>22</td>
+            <td>--&nbsp;Cancer of cervix uteri</td>
+            <td>C53</td>
+          </tr>
+                    <tr>
+            <td>23</td>
+            <td>--&nbsp;Cancer of corpus/uterus, NOS</td>
+            <td>C54-C55</td>
+          </tr>
+                    <tr>
+            <td>24</td>
+            <td>--&nbsp;Cancer of ovary</td>
+            <td>C56</td>
+          </tr>
+                    <tr>
+            <td>25</td>
+            <td>--&nbsp;Cancer of prostate</td>
+            <td>C61</td>
+          </tr>
+                    <tr>
+            <td>26</td>
+            <td>--&nbsp;Cancer of the testis</td>
+            <td>C62</td>
+          </tr>
+                    <tr>
+            <td>27</td>
+            <td>--&nbsp;Cancer of kidney and renal pelvis</td>
+            <td>C64-C65</td>
+          </tr>
+                    <tr>
+            <td>28</td>
+            <td>--&nbsp;Cancer of urinary bladder</td>
+            <td>C67</td>
+          </tr>
+                    <tr>
+            <td>29</td>
+            <td>--&nbsp;Cancer of brain/other nervous system</td>
+            <td>C70-C72</td>
+          </tr>
+                    <tr>
+            <td>30</td>
+            <td>--&nbsp;Cancer of thyroid</td>
+            <td>C73</td>
+          </tr>
+                    <tr>
+            <td>31</td>
+            <td>--&nbsp;Cancer, Hodgkin lymphoma</td>
+            <td>C81</td>
+          </tr>
+                    <tr>
+            <td>32</td>
+            <td>--&nbsp;Cancer, non-Hodgkin lymphoma</td>
+            <td>C82-C85</td>
+          </tr>
+                    <tr>
+            <td>33</td>
+            <td>--&nbsp;Cancer, myeloma</td>
+            <td>C88.7-C88.9, C90.0, C90.2</td>
+          </tr>
+                    <tr>
+            <td>34</td>
+            <td>--&nbsp;Cancer, leukemia</td>
+            <td>C90.1, C91-C95</td>
+          </tr>
+                    <tr>
+            <td>35</td>
+            <td>-&nbsp;In situ, benign and uncertain neoplasms</td>
+            <td>D00-D48</td>
+          </tr>
+                    <tr>
+            <td>36</td>
+            <td>-&nbsp;Diseases of the blood and blood forming organs</td>
+            <td>D50-D89</td>
+          </tr>
+                    <tr>
+            <td>37</td>
+            <td>-&nbsp;Drug-induced deaths</td>
+            <td>D52.1, D59.0, D59.2, D61.1, D64.2, E06.4, E16.0, E23.1, E24.2, E27.3, E66.1, F11.0-F11.5, F11.7-F12.5, F12.7-F13.5, F13.7-F14.5, F14.7-F15.5, F15.7-F16.5, F16.7-F17.0, F17.3-F17.5, F17.7-F18.5, F18.7-F19.5, F19.7-F19.9, G21.1, G24.0, G25.1, G25.4, G25.6, G44.4, G62.0, G72.0, I95.2, J70.2-J70.4, L10.5, L27.0-L27.1, M10.2, M32.0, M80.4, M81.4, M83.5, M87.1, R78.1-R78.5, U01.6, X40-X44, X60-X64, X85, Y10-Y14</td>
+          </tr>
+                    <tr>
+            <td>38</td>
+            <td>-&nbsp;Diseases of the endocrine system</td>
+            <td>E00-E88</td>
+          </tr>
+                    <tr>
+            <td>39</td>
+            <td>--&nbsp;Diabetes mellitus</td>
+            <td>E10-E14</td>
+          </tr>
+                    <tr>
+            <td>40</td>
+            <td>--&nbsp;Nutritional deficiencies</td>
+            <td>E40-E64</td>
+          </tr>
+                    <tr>
+            <td>41</td>
+            <td>---&nbsp;Malnutrition</td>
+            <td>E40-E46</td>
+          </tr>
+                    <tr>
+            <td>42</td>
+            <td>--&nbsp;Obesity</td>
+            <td>E65-E68</td>
+          </tr>
+                    <tr>
+            <td>43</td>
+            <td>--&nbsp;Metabolic disorders</td>
+            <td>E70-E88</td>
+          </tr>
+                    <tr>
+            <td>44</td>
+            <td>-&nbsp;Mental and behavioral disorders</td>
+            <td>F01-F99</td>
+          </tr>
+                    <tr>
+            <td>45</td>
+            <td>-&nbsp;Diseases of the nervous system</td>
+            <td>G00-G98</td>
+          </tr>
+                    <tr>
+            <td>46</td>
+            <td>--&nbsp;Meningitis</td>
+            <td>G00, G03</td>
+          </tr>
+                    <tr>
+            <td>47</td>
+            <td>--&nbsp;Parkinson's disease</td>
+            <td>G20-G21</td>
+          </tr>
+                    <tr>
+            <td>48</td>
+            <td>--&nbsp;Alzheimer's disease</td>
+            <td>G30</td>
+          </tr>
+                    <tr>
+            <td>49</td>
+            <td>--&nbsp;Multiple sclerosis</td>
+            <td>G35</td>
+          </tr>
+                    <tr>
+            <td>50</td>
+            <td>--&nbsp;Epilepsy</td>
+            <td>G40-G41</td>
+          </tr>
+                    <tr>
+            <td>51</td>
+            <td>-&nbsp;Cardiovascular diseases (major)</td>
+            <td>I00-I78</td>
+          </tr>
+                    <tr>
+            <td>52</td>
+            <td>--&nbsp;Heart disease</td>
+            <td>I00-I09, I11, I13, I20-I51</td>
+          </tr>
+                    <tr>
+            <td>53</td>
+            <td>---&nbsp;Rheumatic fever (acute) and chronic rheumatic heart diseases</td>
+            <td>I00-I09</td>
+          </tr>
+                    <tr>
+            <td>54</td>
+            <td>---&nbsp;Coronary heart disease</td>
+            <td>I11, I20-I25, I51.6</td>
+          </tr>
+                    <tr>
+            <td>55</td>
+            <td>----&nbsp;Hypertensive heart disease</td>
+            <td>I11</td>
+          </tr>
+                    <tr>
+            <td>56</td>
+            <td>----&nbsp;Ischemic heart diseases</td>
+            <td>I20-I25</td>
+          </tr>
+                    <tr>
+            <td>57</td>
+            <td>-----&nbsp;Acute myocardial infarction</td>
+            <td>I21-I22</td>
+          </tr>
+                    <tr>
+            <td>58</td>
+            <td>-----&nbsp;Atherosclerotic cardiovascular disease</td>
+            <td>I25.0</td>
+          </tr>
+                    <tr>
+            <td>59</td>
+            <td>---&nbsp;Hypertensive heart and renal disease</td>
+            <td>I13</td>
+          </tr>
+                    <tr>
+            <td>60</td>
+            <td>---&nbsp;Heart failure</td>
+            <td>I50</td>
+          </tr>
+                    <tr>
+            <td>61</td>
+            <td>--&nbsp;Hypertension (essential/primary) and hypertensive renal disease</td>
+            <td>I10, I12</td>
+          </tr>
+                    <tr>
+            <td>62</td>
+            <td>--&nbsp;Cerebrovascular diseases</td>
+            <td>I60-I69</td>
+          </tr>
+                    <tr>
+            <td>63</td>
+            <td>--&nbsp;Atherosclerosis</td>
+            <td>I70</td>
+          </tr>
+                    <tr>
+            <td>64</td>
+            <td>-&nbsp;Phlebitis, thrombophlebitis, venous embolism and thrombosis</td>
+            <td>I80-I82</td>
+          </tr>
+                    <tr>
+            <td>65</td>
+            <td>-&nbsp;Diseases of the respiratory system</td>
+            <td>J00-J98</td>
+          </tr>
+                    <tr>
+            <td>66</td>
+            <td>--&nbsp;Influenza and pneumonia</td>
+            <td>J10-J18</td>
+          </tr>
+                    <tr>
+            <td>67</td>
+            <td>---&nbsp;Influenza</td>
+            <td>J10-J11</td>
+          </tr>
+                    <tr>
+            <td>68</td>
+            <td>---&nbsp;Pneumonia</td>
+            <td>J12-J18</td>
+          </tr>
+                    <tr>
+            <td>69</td>
+            <td>--&nbsp;Chronic lower respiratory diseases</td>
+            <td>J40-J47</td>
+          </tr>
+                    <tr>
+            <td>70</td>
+            <td>---&nbsp;Bronchitis, chronic and unspecified</td>
+            <td>J40-J42</td>
+          </tr>
+                    <tr>
+            <td>71</td>
+            <td>---&nbsp;Emphysema</td>
+            <td>J43</td>
+          </tr>
+                    <tr>
+            <td>72</td>
+            <td>---&nbsp;Asthma</td>
+            <td>J45-J46</td>
+          </tr>
+                    <tr>
+            <td>73</td>
+            <td>--&nbsp;Pneumoconiosis</td>
+            <td>J60-J66</td>
+          </tr>
+                    <tr>
+            <td>74</td>
+            <td>--&nbsp;Pneumonitis due to solids and liquids</td>
+            <td>J69</td>
+          </tr>
+                    <tr>
+            <td>75</td>
+            <td>-&nbsp;Diseases of the digestive system</td>
+            <td>K00-K92</td>
+          </tr>
+                    <tr>
+            <td>76</td>
+            <td>--&nbsp;Peptic ulcer</td>
+            <td>K25-K28</td>
+          </tr>
+                    <tr>
+            <td>77</td>
+            <td>--&nbsp;Liver disease, chronic and cirrhosis</td>
+            <td>K70, K73-K74</td>
+          </tr>
+                    <tr>
+            <td>78</td>
+            <td>---&nbsp;Liver, alcoholic liver disease</td>
+            <td>K70</td>
+          </tr>
+                    <tr>
+            <td>79</td>
+            <td>--&nbsp;Cholelithiasis and other disorders of gallbladder</td>
+            <td>K80-K82</td>
+          </tr>
+                    <tr>
+            <td>80</td>
+            <td>--&nbsp;Pancreas and biliary tract disorders</td>
+            <td>K83-K86</td>
+          </tr>
+                    <tr>
+            <td>81</td>
+            <td>-&nbsp;Skin and subcutaneous tissue</td>
+            <td>L00-L98</td>
+          </tr>
+                    <tr>
+            <td>82</td>
+            <td>-&nbsp;Diseases of the musculoskeletal system & connective tissue</td>
+            <td>M00-M99</td>
+          </tr>
+                    <tr>
+            <td>83</td>
+            <td>--&nbsp;Rheumatoid arthritis and related inflammatory polyarthropathies</td>
+            <td>M05-M08</td>
+          </tr>
+                    <tr>
+            <td>84</td>
+            <td>-&nbsp;Genitourinary system</td>
+            <td>N00-N98</td>
+          </tr>
+                    <tr>
+            <td>85</td>
+            <td>--&nbsp;Nephritis, nephrotic syndrome and nephrosis</td>
+            <td>N00-N07, N17-N19, N25-N27</td>
+          </tr>
+                    <tr>
+            <td>86</td>
+            <td>---&nbsp;Renal failure</td>
+            <td>N17-N19</td>
+          </tr>
+                    <tr>
+            <td>87</td>
+            <td>-&nbsp;Pregnancy, childbirth, and the puerperium</td>
+            <td>O00-O99</td>
+          </tr>
+                    <tr>
+            <td>88</td>
+            <td>-&nbsp;Perinatal conditions</td>
+            <td>P00-P96</td>
+          </tr>
+                    <tr>
+            <td>89</td>
+            <td>-&nbsp;Congenital malformations, deformations, chromosomal abnormalities</td>
+            <td>Q00-Q99</td>
+          </tr>
+                    <tr>
+            <td>90</td>
+            <td>-&nbsp;Symptoms, signs not otherwise classified</td>
+            <td>R00-R99</td>
+          </tr>
+                    <tr>
+            <td>91</td>
+            <td>-&nbsp;External cause of death, injury and accidents</td>
+            <td>U01-U03, V01-Y89</td>
+          </tr>
+                    <tr>
+            <td>92</td>
+            <td>--&nbsp;Firearm related (accidental, suicide, homicide, und., legal interv.)</td>
+            <td>U01.4, W32-W34, X72-X74, X93-X95, Y22-Y24, Y35.0</td>
+          </tr>
+                    <tr>
+            <td>93</td>
+            <td>--&nbsp;Poisoning (accidental, suicide, homicide, und., legal interv.)</td>
+            <td>U01.6, U01.7, X40-X49, X60-X69, X85-X90, Y10-Y19, Y35.2</td>
+          </tr>
+                    <tr>
+            <td>94</td>
+            <td>--&nbsp;Suffocation and strangulation (accidental, suicide, homicide, und.)</td>
+            <td>W75-W84, X70, X91, Y20</td>
+          </tr>
+                    <tr>
+            <td>95</td>
+            <td>--&nbsp;Homicide (assault)</td>
+            <td>U01-U02, X85-Y09, Y87.1</td>
+          </tr>
+                    <tr>
+            <td>96</td>
+            <td>---&nbsp;Homicide (assault), by discharge of firearm</td>
+            <td>U01.4, X93-X95</td>
+          </tr>
+                    <tr>
+            <td>97</td>
+            <td>--&nbsp;Suicide (intentional self-harm)</td>
+            <td>U03, X60-X84, Y87.0</td>
+          </tr>
+                    <tr>
+            <td>98</td>
+            <td>---&nbsp;Suicide (intentional self-harm), not firearm, other or unknown</td>
+            <td>U03, X60-X71, X75-X84, Y87.0</td>
+          </tr>
+                    <tr>
+            <td>99</td>
+            <td>---&nbsp;Suicide (intentional self-harm), by firearm</td>
+            <td>X72-X74</td>
+          </tr>
+                    <tr>
+            <td>100</td>
+            <td>--&nbsp;Accidents</td>
+            <td>V01-X59, Y85-Y86</td>
+          </tr>
+                    <tr>
+            <td>101</td>
+            <td>---&nbsp;Accidents, transport</td>
+            <td>V01-V99, Y85</td>
+          </tr>
+                    <tr>
+            <td>102</td>
+            <td>----&nbsp;Accidents, other transport, not motor vehicles</td>
+            <td>V01, V05-V06, V09.1, V09.3-V09.9, V10-V11, V15-V18, V19.3, V19.8-V19.9, V80.0-V80.2, V80.6-V80.9, V81.2-V81.9, V82.2-V82.9, V87.9, V88.9, V89.1, V89.3, V89.9, V90-V99, Y85</td>
+          </tr>
+                    <tr>
+            <td>103</td>
+            <td>----&nbsp;Accidents, motor vehicle</td>
+            <td>V02-V04, V09.0, V09.2, V12-V14, V19.0-V19.2, V19.4-V19.6, V20-V79, V80.3-V80.5, V81.0-V81.1, V82.0-V82.1, V83-V86, V87.0-V87.8, V88.0-V88.8, V89.0, V89.2</td>
+          </tr>
+                    <tr>
+            <td>104</td>
+            <td>---&nbsp;Accidents, nontransport</td>
+            <td>W00-X59, Y86</td>
+          </tr>
+                    <tr>
+            <td>105</td>
+            <td>---&nbsp;Accidents, nontransport excluding poisoning</td>
+            <td>W00-X39, X50-X59, Y86</td>
+          </tr>
+                    <tr>
+            <td>106</td>
+            <td>----&nbsp;Falls</td>
+            <td>W00-W19</td>
+          </tr>
+                    <tr>
+            <td>107</td>
+            <td>----&nbsp;Accidental discharge of firearms</td>
+            <td>W32-W34</td>
+          </tr>
+                    <tr>
+            <td>108</td>
+            <td>---&nbsp;Drowning and submersion (accidental)</td>
+            <td>V90, V92, W65-W74</td>
+          </tr>
+                    <tr>
+            <td>109</td>
+            <td>----&nbsp;Fire, smoke, and flames (accidental)</td>
+            <td>X00-X09</td>
+          </tr>
+                    <tr>
+            <td>110</td>
+            <td>----&nbsp;Accidental poisoning and exposure to noxious substances</td>
+            <td>X40-X49</td>
+          </tr>
+                    <tr>
+            <td>111</td>
+            <td>-----&nbsp;Accidental drug poisoning</td>
+            <td>X40-X44</td>
+          </tr>
+                    <tr>
+            <td>112</td>
+            <td>-----&nbsp;Accidental alcohol poisoning</td>
+            <td>X45</td>
+          </tr>
+                    <tr>
+            <td>113</td>
+            <td>--&nbsp;Complications of medical and surgical care</td>
+            <td>Y40-Y84, Y88</td>
+          </tr>
+                    </tbody>
+        </table>
+            </div>
+                            </div>
+                            </div>
+                        
+                        </div>
+                        
+                    </div>
+                        
+                    </div>
+                    <div class="tab-pane" id="tab-1-2">
+                        <p>1, 3, 5, and 10-year time period groupings are easily selectable.</p>
+                        <strong>Custom Time Periods</strong>
+                        <p>Custom time periods can be created for any set of years from 1950-2017.</p>
+
+                    </div>
+                    <div class="tab-pane" id="tab-1-3">
+                        <p>National, state, and county level data is available. The geographic region can be individually selected or joined into custom aggregated regions.</p>
+                        <strong>NOTE:</strong>
+                        <li>Alaska data is not available at the county level before 1979.</li>
+                        <li>Alaska and Hawaii data is not available before 1960.</li>
+                        <li>New Jersey data is not available from 1962-1963.</li>
+
+                    </div> 
+                    <div class="tab-pane" id="tab-1-4">
+                        <strong>Age Group</strong>
+                        <p>12 or 13 age groups are available depending on the time period.* Also, custom aggregate age groups can be selected.</p>
+                        <strong>Race</strong>
+                        <p>'White', 'Black', 'American Indian or Alaska Native', 'Asian or Pacific Islander' are available depending on the time period:</p>
+                        <li>Pre - 1968:</li>
+                        <p></p>
+
+
+
+                    </div>  
+                </div>
+
+            </div>
+            
+        </div>  
+        <hr> 
+        <h5>Share Your Research:</h5>
+        <p>Contribute to the MOIRA Research Forum by posting your maps and charts. Add context and accompanying research to help advance our understanding of mortality in the United States.</p>  
+            
+        
+            
+        </div>
+        
+            
+    
+            
+</section>  
+
+{% endblock content %}

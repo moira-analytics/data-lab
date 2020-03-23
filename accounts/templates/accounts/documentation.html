@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Documentation{% endblock title %}
+{% block content %}
+            <!-- Hero-->
+            {% load static %}
+
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="introduction">
+                    <div class="mb-5">
+                        <h5>Welcome to the MOIRA API</h5>
+                        <p class="lead text-justify">
+                        This documentation is intended to help you get the most out of the wealth of data in the MOIRA system. The code examples are currently in Python 3. Additional languages will be added to the documentation soon. </p><p> Thank you for using MOIRA. </p>
+                    </div>
+                </div>
+                <div id="gettingstarted">
+                    <div class="mb-5">
+                        <hr class="mb-5">
+                        <h5>Getting Started</h5>
+                        <p class="lead text-justify">These two functions are all you need to generate custom queries from MOIRA. The first generates an API key using your login credentials and the second returns a dataset based on your criteria.</p>
+                    </div>
+                    <div class="mb-5">
+                        <pre>
+                        <code class="language-python">
+# Import the following Python modules
+import pandas as pd
+from io import StringIO
+import requests
+
+
+def log_in(username, password): 
+    """
+    Generate API key to access MOIRA system using your login credentials. Each API key is valid for one hour.
+    --------------
+    inputs:
+    username; str
+    password; str
+    ----
+    returns:
+    token; str
+    """
+    payload = "username=" + username + "&password=" + password
+    headers = {'Host': "moira.pitt.edu",
+               'Content-Type': "application/x-www-form-urlencoded"}
+
+    response = requests.request("POST", 
+                                "https://moira.pitt.edu/api/login", 
+                                data=payload, 
+                                headers=headers)
+
+    x = response.json()
+    token = "Bearer {}".format(x["token"])
+    return token
+    
+
+def get_rates(query_data, username, password):
+    """
+    Generate 
+    --------------
+    inputs:
+    
+    query_data, dict
+    username, str
+    password, str
+    ----
+    returns:
+    
+    content, pandas.DataFrame
+    """
+    payload = str(query_data).replace("'", "\"")
+    headers = {'Authorization': log_in(username, password),
+               'Content-Type': "application/json",
+               'Host': "moira.pitt.edu"
+              }
+
+    response = requests.request("POST", 
+                                "https://moira.pitt.edu/api/get_rate", 
+                                data=payload, 
+                                headers=headers)
+
+    print(response.text)
+    
+    # Return a pandas DataFrame with the response
+    output = StringIO(response.text)
+    content = pd.read_csv(output, sep=",")
+    
+    return content
+                        </code>
+                        </pre>
+                    
+                    </div>
+                    
+                </div>
+                <hr>
+                <div id="apiquery">
+                <h5>API Query</h5>
+                <p class="lead text-justify">Once you have declared these two methods, you are ready to build your MOIRA query. The MOIRA API accepts a payload of selection criteria in the form of a dictionary. The following is an example of a MOIRA API query.</p>
+                    <div class="mb-5">
+                        <pre>
+                        <code class="language-python">
+# Your query must be structured as a dictionary like the one below:
+payload = {"timePeriod": [2000, 2001, 2002, 2003, 2004, 2005],
+ "geoLevel":  "County",
+ "abbreviatedStates":["CA","AZ"],
+ "allCounties":"true",
+ "ageGroup": "All Default",
+ "ageGroupCategory": "12",
+ "race": "All",
+ "sex": "All",
+ "codCategory": "113",
+ "cod": [31,32,33,34],
+ "groupBy": ["timePeriod"],
+ "ratesPer": 1000,
+ "ageAdjustment": "true"
+}                        </code>
+                        </pre>
+                    
+                    </div>
+                    <div class="mb-5">
+                        <pre>
+                        <code class="language-python">
+# Save dictionary of selection criteria  as a string with items in double not single quotes
+payload = str(payload).replace("'","\"")
+
+username, password = "USER", "PASSWORD" 
+
+# Send POST request with your selection criteria and login info
+moira_data = get_rates(payload, username, password)
+
+# Save response as CSV file
+moira_data.to_csv('moira_data.csv')
+                        </code>
+                        </pre>
+                    
+                    </div>
+                </div>
+                <div id="dataanalysis">
+                    <h5>Data Analysis</h5>
+                <p class="lead text-justify"></p>
+                    <div class="mb-5">
+                        <pre>
+                        <code class="language-python">
+"""
+
+"""                        </code>
+                        </pre>
+                    
+                    </div>
+                    <h7>Flexible Clustering</h7>
+                    <div class="mb-5">
+                        <pre>
+                        <code class="language-python">
+"""
+
+"""
+                        </code>
+                        </pre>
+                    
+                    </div>
+                </div>
+                <div id="viz">
+                    <h5>Visualizations</h5>
+                        <p class="lead text-justify">Interactive visualization is an important component of data analysis and research. The following guide is intended to help users create interactive and animated visualizations with MOIRA data using D3.js.</p>
+                    <h6>The Bar Chart Race</h6><p>The following visualization example is based off of the <a href="https://observablehq.com/@d3/bar-chart-race-explained">D3 Bar Chart Race</a>, created by Mike Bostock in Observable HQ. This example shows the top 12 causes of death by total number of deaths since 1980. Use the instructions and code below to create your own version.</p>
+<a href="https://observablehq.com/d/a5184e28253f90ad"><img src="https://i.gyazo.com/076e9217ca3bb1c3abd6865502268cc2.gif" alt="Image from Gyazo" width="856"/></a>                </div>
+            
+            <br><h6>Time Series Choropleth</h6><p>This next example is a time-series choropleth for the state of Pennsylvania. You can find individual state shapefiles <a href="https://catalog.data.gov/dataset/tiger-line-shapefile-2016-nation-u-s-current-county-and-equivalent-national-shapefile">here</a></p>
+<a href="https://observablehq.com/@raanan-g/lung-cancer-mortality-rate-pennsylvania-1999-2017#sliderYear"><img src="https://i.gyazo.com/01d49a36ef3c902cce19c10b4ed37730.gif" alt="Image from Gyazo" width="966"/></a>
+            </div>
+            <div class="col-lg-3">
+                <br>
+                <br>
+                <ul class="nav-sidebar sticky-sidebar">
+                    <li><a class="smoothscroll" href="#introduction">MOIRA API Documentaion</a></li>
+                    <li><a class="smoothscroll" href="#gettingstarted">Getting Started</a></li>
+                    <li><a class="smoothscroll" href="#apiquery">API Query</a></li>
+                    <li><a class="smoothscroll" href="#dataanalysis">Data Analysis</a></li>
+                    <li><a class="smoothscroll" href="#viz">Visualizations</a></li>
+                    
+                </ul>
+            </div>
+                    
+                    
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}

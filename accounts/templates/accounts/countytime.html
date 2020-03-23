@@ -1,0 +1,461 @@
+{% extends 'base.html' %}
+{% block title %}MOIRA | Geo Timeseries{% endblock title %}
+{% block content %}
+{% load static %}
+<section class="module" style="background: linear-gradient(180deg, rgba(48,44,94,0) 66%, rgba(9,86,121,0.5760679271708684) 100%)">
+    <div id="loading" class="modal">
+                <center>
+                <!-- Modal content -->
+                <div class="modal-dialog-centered">
+                    
+                    <div class="container" style="background-color: blueviolet; box-shadow: 3px 3px 3px grey; position:relative">
+                    <br><br>
+                    <h4 style="color: aliceblue">Please Wait</h4>
+                    <p style="color: aliceblue">Fetching data...</p>
+                    <br><br>
+                    </div>
+                    
+                    
+                </div>
+                </center>
+            </div>
+    <div class="container">
+    
+    {{ alerts }}
+        
+      <form method="post" onsubmit="apiAlert()">
+        {% csrf_token %}
+        <div class="row" style="height:100px">
+        <div class="col-md-4">
+        
+        </div>
+        <div class="col-md-4">
+        <center>
+        <br><br>
+        {{ county_time_form.title_6 }}
+        </center>
+        </div>
+        <div class="col-md-4">
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-brand" type="submit">Create Plot</button>
+            
+        <button class="btn btn-brand" href="raceSex" type="reset"><a style="color:azure" href="raceSex">New Query</a></button>           
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link" data-toggle="collapse" href="#collapse-1" class="" aria-expanded="true">Time Period</a></h6>
+                   </div>
+                   <div class="collapse show" style="position: absolute; width:350px" id="collapse-1" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="width:300;position: absolute;background-color:ghostwhite">
+                          <small>Year Range:</small>
+                          {{ county_time_form.year1_6 }}
+                          <small>-</small>
+                          {{ county_time_form.year2_6 }}
+                          <br><hr><p></p>
+                      </div> 
+                    </div>
+                </div>
+            </div>    
+        </div>   
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion2">
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-2" class="" aria-expanded="false">Geography</a></h6>
+                   </div>
+                   <div class="collapse" style="position: absolute; width:290px" id="collapse-2" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        {{ county_time_form.geoLevel_6 }}
+                      <small>States:</small>
+                      {{ county_time_form.abbreviatedStates_6 }}
+                      <hr>
+                      <small>Select Counties:</small><br>
+                      <a>Find Specific Counties:</a>
+                      <div class="container" id="countybox" style="background-color:rgba(245, 244, 245, 1);overflow-y: scroll; height:300px">
+                      <small>Alabama</small>
+                        {{ county_time_form.ALselect_6 }}
+                        <small>Alaska</small>
+                        {{ county_time_form.AKselect_6 }}
+                        <small>Arizona</small>
+                        {{ county_time_form.AZselect_6 }}
+                        <small>Arkansas</small>
+                        {{ county_time_form.ARselect_6 }}
+                        <small>California</small>
+                        {{ county_time_form.CAselect_6 }}
+                        <small>Colorado</small>
+                        {{ county_time_form.COselect_6 }}
+                        <small>Connecticut</small>
+                        {{ county_time_form.CTselect_6 }}
+                        <small>Delaware</small>
+                        {{ county_time_form.DEselect_6 }}
+                        <small>District of Columbia</small>
+                        {{ county_time_form.DCselect_6 }}
+                        <small>Florida</small>
+                        {{ county_time_form.FLselect_6 }}
+                        <small>Georgia</small>
+                        {{ county_time_form.GAselect_6 }}
+                        <small>Hawaii</small>
+                        {{ county_time_form.HIselect_6 }}
+                        <small>Idaho</small>
+                        {{ county_time_form.IDselect_6 }}
+                        <small>Illinois</small>
+                        {{ county_time_form.ILselect_6 }}
+                        <small>Indiana</small>
+                        {{ county_time_form.INselect_6 }}
+                        <small>Iowa</small>
+                        {{ county_time_form.IAselect_6 }}
+                        <small>Kansas</small>
+                        {{ county_time_form.KSselect_6 }}
+                        <small>Kentucky</small>
+                        {{ county_time_form.KYselect_6 }}
+                        <small>Louisiana</small>
+                        {{ county_time_form.LAselect_6 }}
+                        <small>Maine</small>
+                        {{ county_time_form.MEselect_6 }}
+                        <small>Maryland</small>
+                        {{ county_time_form.MDselect_6 }}
+                        <small>Massachusetts</small>
+                        {{ county_time_form.MAselect_6 }}
+                        <small>Michigan</small>
+                        {{ county_time_form.MIselect_6 }}
+                        <small>Minnesota</small>
+                        {{ county_time_form.MNselect_6 }}
+                        <small>Mississippi</small>
+                        {{ county_time_form.MSselect_6 }}
+                        <small>Missouri</small>
+                        {{ county_time_form.MOselect_6 }}
+                        <small>Montana</small>
+                        {{ county_time_form.MTselect_6 }}
+                        <small>Nebraska</small>
+                        {{ county_time_form.NEselect_6 }}
+                        <small>Nevada</small>
+                        {{ county_time_form.NVselect_6 }}
+                        <small>New Hampshire</small>
+                        {{ county_time_form.NHselect_6 }}
+                        <small>New Jersey</small>
+                        {{ county_time_form.NJselect_6 }}
+                        <small>New Mexico</small>
+                        {{ county_time_form.NMselect_6 }}
+                        <small>New York</small>
+                        {{ county_time_form.NYselect_6 }}
+                        <small>North Carolina</small>
+                        {{ county_time_form.NCselect_6 }}
+                        <small>North Dakota</small>
+                        {{ county_time_form.NDselect_6 }}
+                        <small>Ohio</small>
+                        {{ county_time_form.OHselect_6 }}
+                        <small>Oklahoma</small>
+                        {{ county_time_form.OKselect_6 }}
+                        <small>Oregon</small>
+                        {{ county_time_form.ORselect_6 }}
+                        <small>Pennsylvania</small>
+                        {{ county_time_form.PAselect_6 }}
+                        <small>Rhode Island</small>
+                        {{ county_time_form.RIselect_6 }}
+                        <small>South Carolina</small>
+                        {{ county_time_form.SCselect_6 }}
+                        <small>South Dakota</small>
+                        {{ county_time_form.SDselect_6 }}
+                        <small>Tennessee</small>
+                        {{ county_time_form.TNselect_6 }}
+                        <small>Texas</small>
+                        {{ county_time_form.TXselect_6 }}
+                        <small>Utah</small>
+                        {{ county_time_form.UTselect_6 }}
+                        <small>Vermont</small>
+                        {{ county_time_form.VTselect_6 }}
+                        <small>Virginia</small>
+                        {{ county_time_form.VAselect_6 }}
+                        <small>Washington</small>
+                        {{ county_time_form.WAselect_6 }}
+                        <small>West Virginia</small>
+                        {{ county_time_form.WVselect_6 }}
+                        <small>Wisconsin</small>
+                        {{ county_time_form.WIselect_6 }}
+                        <small>Wyoming</small>
+                        {{ county_time_form.WYselect_6 }}    
+                      </div><!-- make this appear only when County is selected-->
+                      
+
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>    
+        <div class="col-md-4">
+                <br>
+            <div class="accordion" id="accordion3">            
+                <div class="accordion-item">
+                   <div class="accordion-item-header">
+                      <h6><a  class="accordion-link collapsed" data-toggle="collapse" href="#collapse-3" class="" aria-expanded="false">Cause of Death</a></h6>
+                   </div>
+                   <div class="collapse" style="position:absolute; width:290px" id="collapse-3" data-parent="#accordion1">
+                      <div class="accordion-item-body" style="height: 400px;overflow-y: scroll;position: absolute;background-color:ghostwhite">
+                        <p>Choose from ONE group:</p>
+                      <small>OCMAP 63 <b>(Available all time periods)</b></small>
+                      {{ county_time_form.cod_6 }}
+                      <hr>
+                      <small>MOIRA 113 <b>(Available between 1979 - 2017)</b></small>
+                      {{ county_time_form.cod113_6 }}
+                      <hr>
+                      <small>Custom Cause of Death:</small>
+                      
+                      </div>
+                    </div>
+                </div>
+            </div>    
+        </div>  
+
+        </div>
+
+    
+        <center>
+
+        
+        <br><br>
+        {{ text }}
+        
+        <div class="container" id="chart" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width:900px;height: 400px; background-color: white">
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <style> /* set the CSS */
+
+          .grid line {
+            stroke: lightgrey;
+            stroke-opacity: 0.9;
+            shape-rendering: crispEdges
+          }
+          .grid path {
+            stroke-width: 0;
+          }
+        </style>
+            <script>
+             function apiAlert(){
+    var modal = document.getElementById("loading");
+    modal.style.display = "block";
+}      
+            
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 70, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// Parse the date / time
+var parseDate = d3.timeParse("%Y");
+
+// Set the ranges
+var x = d3.scaleTime().range([0, width]);  
+var y = d3.scaleLinear().range([height-100, 0]);
+
+// Define the line
+var rate_line = d3.line()	
+    .x(function(d) { return x(d.Time_Period_Label); })
+    .y(function(d) { return y(d.Age_Adjusted_Rate); });       
+
+// Adds the svg canvas
+var svg = d3.select("#chart")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom + "px")
+    .append("g")
+        .attr("transform", "translate(" + margin.left + "," + (margin.top + 30) + ")");
+    
+function make_x_gridlines() {		
+    return d3.axisBottom(x)
+        .ticks(10)
+}
+
+// gridlines in y axis function
+function make_y_gridlines() {		
+    return d3.axisLeft(y)
+        .ticks(10)
+}
+                
+// Get the data         
+d3.csv('{% static 'temp_result.csv' %}', function(error, data){
+    data.forEach(function(d) {
+		d.Time_Period_Label = parseDate(d.Time_Period_Label);
+		d.Age_Adjusted_Rate = +d.Age_Adjusted_Rate;
+    });
+    
+    console.log(data)
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.Time_Period_Label; }));
+    y.domain([0, d3.max(data, function(d) { return d.Age_Adjusted_Rate; })]);
+    
+    // Nest the entries by symbol
+    var dataNest = d3.nest()
+        .key(function(d) {return d.County;})
+        .entries(data);
+
+    // set the colour scale
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    legendSpace = width/dataNest.length; // spacing for the legend
+    //legendSpots = 
+    // Loop through each symbol / key
+    
+    svg.append("rect")
+        .attr("width", "88%")
+        .attr("height", "55%")
+        .attr("transform","translate(0,-5)")
+        .attr("fill", "rgba(214, 214, 214, 0.2)");
+    
+      // add the X gridlines
+    svg.append("g")			
+      .attr("class", "grid")
+      .attr("height","100%")
+      .attr("stroke-width","0.5px")
+      .attr("transform", "translate(0,200)")
+      .call(make_x_gridlines()
+          .tickSize(-210,0,0)
+          .tickFormat("")
+      )
+
+      // add the Y gridlines
+    svg.append("g")			
+        .attr("class", "grid")
+        .attr("stroke-width","0.5px")
+        .call(make_y_gridlines()
+          .tickSize(-width)
+          .tickFormat("")
+    )
+      // text label for the y axis
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - ((height-0)/2.85))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Rate Per 1,000 (Age Adjusted)"); 
+    
+    dataNest.forEach(function(d,i) { 
+        
+        svg.append("path")
+            .attr("class", "line")
+            .attr("fill", "none")
+            .attr("stroke-width", "3px")
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .attr("d", rate_line(d.values));
+        
+        var down = 0;
+        var o = i;
+        if (i > 4) {
+            down = 180;
+            i = i-5;
+        }
+        if (o > 9){
+            down = down+down;
+            i = o-10;
+        }
+        
+                // Add the Legend
+        svg.append("text")
+            .attr("x", (legendSpace) + down)  // space legend
+            .attr("y", height - 0 + (i*20) - 55)
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .text(d.key); 
+        
+        
+        // Add the Legend
+        svg.append("line")
+            .attr("x1", (legendSpace/2)+down)
+            .attr("x2", (legendSpace/2)+down+20)
+            .attr("y1", height - 0 + (i*20) - 60)
+            .attr("y2", height - 0 + (i*20) - 60)
+            .attr("stroke-width", "3px")    // style the legend
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); });
+            
+
+    });
+    
+    
+    
+    // Add the X Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,200)")
+      .call(d3.axisBottom(x));
+
+    // Add the Y Axis
+    svg.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y));
+    
+    svg.append("text")
+        .attr("x", 250)             
+        .attr("y", -20)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "18px") 
+        .style("text-decoration", "bold")  
+        .text("{{ title }}");
+    
+    
+});
+       
+       
+       /*, function(error, data) {
+    console.log(data)
+    data.forEach(function (d) {
+        d.Time_Period_Label = +d.Time_Period_Label;
+        d['White Male'] = +d['White Male'];
+        d['White Female'] = +d['White Female'];
+        d['Black Male'] = +d['Black Male'];
+        d['Black Female'] = +d['Black Female'];
+        d['Asian or Pacific Islander Male'] = +d['Asian or Pacific Islander Male'];
+        d['Asian or Pacific Islander Female'] = +d['Asian or Pacific Islander Female'];
+        d['American Indian or Alaska Native Male'] = +d['American Indian or Alaska Native Male'];
+        d['American Indian or Alaska Native Female'] = +d['American Indian or Alaska Native Female'];
+    });
+
+    var chart = makeLineChart(data, 'Time_Period_Label', {
+        'White Male': {column: 'White Male'},
+        'White Female': {column: 'White Female'},
+        'Black Male': {column: 'Black Male'},
+        'Black Female': {column: 'Black Female'},
+        'Asian or Pacific Islander Male': {column: 'Asian or Pacific Islander Male'},
+        'Asian or Pacific Islander Female': {column: 'Asian or Pacific Islander Female'},
+        'American Indian or Alaska Native Male': {column: 'American Indian or Alaska Native Male'},
+        'American Indian or Alaska Native Female': {column: 'American Indian or Alaska Native Female'}
+    }, {xAxis: 'Years', yAxis: 'Age Adjusted Rate'});
+    chart.bind("#chart-line1");
+    chart.render();
+
+});*/
+                
+                
+                
+                
+            </script>
+        </div>
+        </center>
+        <hr>
+        
+    
+     </form> 
+        <button class="btn btn-brand" onclick="saveSVG()">Download Chart</button>
+        <script src="{% static 'assets/js/saveSvgAsPng.js' %}"></script>
+        <script>function saveSVG(){ saveSvgAsPng(document.querySelector("svg"), "moira.png");}</script>
+         <br><br>
+        <p>Data was suppressed for the following categories:</p>
+        <div class="container" id="results" style="background-color: white; height:400px; overflow-y: scroll">
+        <table class="table table-striped table-hover ">
+                  {{ suptable }}
+        </table>
+        </div>
+        <hr>
+        {{ query }}
+
+    </div>
+</section>
+
+
+{% endblock content %}
